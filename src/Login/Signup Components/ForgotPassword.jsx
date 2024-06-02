@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className = "Total">
+        <div className = "total">
             <h1>Forgot Password</h1>
             <div className = "submitLine">
             <div className = "input" >
