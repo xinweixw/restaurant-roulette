@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginSignup from './Login/Signup Components/LoginSignup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LoginSignupConnected from './Login/Signup Components/LoginSignupConnected';
 import HomePage from './Login/HomePage Components/HomePage';
 import ForgotPassword from './Login/Signup Components/ForgotPassword';
 
@@ -14,7 +16,7 @@ function App() {
 
     async function isAuth() {
         try {
-            const response = await fetch("http://localhost:5000/auth/is-verify", {
+            const response = await fetch("http://localhost:5000/auth/verify", {
                 method: "GET", 
                 headers: { token: localStorage.token }
             }); 
@@ -34,12 +36,12 @@ function App() {
         <Fragment>
             <Router>
                 <Routes>
-                    <Route path="/login-signup" element={!isAuthenticated ? (<LoginSignup setAuth={setAuth} />) : (<Navigate to="/homepage" />)} />
+                    <Route path="/login-signup" element={!isAuthenticated ? (<LoginSignupConnected setAuth={setAuth} />) : (<Navigate to="/homepage" />)} />
                     <Route path="/homepage" element={isAuthenticated ? (<HomePage setAuth={setAuth} />) : (<Navigate to="/login-signup" />)} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="*" element={<LoginSignup setAuth={setAuth} />} /> {/* Default route */}
                 </Routes>
             </Router>
+            <ToastContainer />
         </Fragment>
     );
 };

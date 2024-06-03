@@ -16,13 +16,19 @@ module.exports = async(req, res, next) => {
         const payload = jwt.verify(jwtToken, process.env.JWT_SECRET); 
 
         req.user = payload.user; 
+        next();
 
     } catch (err) {
         // console.error(err.message); 
         // return res.status(403).json("Not Authorised"); 
-        err.status(403); 
-        return next(err); 
+        // err.status(403); 
+        // return next(err); 
+        console.error(err.message); 
+        if (err.name === 'JsonWebTokenError') {
+            return res.status(403).json("JWT malformed");
+        }
+        return res.status(403).json("Not Authorised");
     }
 
-    next(); 
+    // next(); 
 }; 

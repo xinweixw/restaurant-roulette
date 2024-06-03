@@ -1,12 +1,14 @@
 import './LoginSignup.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import userIcon from '../../assets/user_image.png';
 import emailIcon from '../../assets/email_image.png';
 import passwordIcon from '../../assets/password_image.png';
 
-const LoginSignup = ({ setAuth }) => {
+const LoginSignupConnected = ({ setAuth }) => {
     const [action, setAction] = useState("Sign Up");
     const navigate = useNavigate();
     const [loginDisabled, setLoginDisabled] = useState(true);
@@ -29,6 +31,20 @@ const LoginSignup = ({ setAuth }) => {
 
     const onChange = (e) => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
+        setWarningMessage("");
+    };
+
+    const handleLogin = () => {
+        // Navigate to the login page
+        setAction("Login");
+        setSuccessMessage("");
+        setWarningMessage("");
+    };
+
+    const handleSignup = () => {
+        // Navigate to the signup page
+        setAction("Sign Up");
+        setSuccessMessage("");
         setWarningMessage("");
     };
     
@@ -56,6 +72,7 @@ const LoginSignup = ({ setAuth }) => {
                 localStorage.setItem("token", parseRes.token);
                 setAuth(true); 
                 navigate('/homepage');
+                toast.success('Login Successful');
             } else {
                 setAuth(false);
                 setWarningMessage('Invalid Email or Password');
@@ -153,6 +170,7 @@ const LoginSignup = ({ setAuth }) => {
                         />
                     </div>
                 </div>
+            </form>
 
                 <div className="warningMessage"> 
                     {warningMessage}
@@ -182,4 +200,4 @@ const LoginSignup = ({ setAuth }) => {
     );
 }
 
-export default LoginSignup;
+export default LoginSignupConnected;

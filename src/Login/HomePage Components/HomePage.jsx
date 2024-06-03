@@ -30,7 +30,7 @@ const HomePage = ({ setAuth }) => {
         e.preventDefault();
         localStorage.removeItem("token");
         setAuth(false);
-        navigate('/login-signup');
+        // navigate('/login-signup');
       };
 
     return (
