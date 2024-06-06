@@ -8,8 +8,5 @@
             "src": "/(.*)",
             "dest": "/"
         }
-    ],
-    "scripts": {
-        "build": "npm run build"
-    }
+    ]
 }
