@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 dotenv.config(); 
+/*
 const Pool = require('pg').Pool; 
 
 const pool = new Pool({
@@ -11,3 +12,11 @@ const pool = new Pool({
 }); 
 
 module.exports = pool; 
+*/
+const { createClient } = require('@supabase/supabase-js');
+const supabaseURL = process.env.SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase = createClient(supabaseURL, supabaseServiceKey);
+
+module.exports = supabase;
