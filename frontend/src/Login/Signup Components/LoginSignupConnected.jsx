@@ -62,7 +62,7 @@ const LoginSignupConnected = ({ setAuth }) => {
         e.preventDefault(); 
         try {
             const body = { email, password };
-            const response = await fetch("http://localhost:5000/auth/login", {
+            const response = await fetch("https://restaurant-roulette-backend.vercel.app/auth/login", {
                 method: "POST", 
                 headers: {"Content-Type": "application/json"}, 
                 body: JSON.stringify(body)
@@ -87,7 +87,7 @@ const LoginSignupConnected = ({ setAuth }) => {
         e.preventDefault();
         try {
             const body = { email, password, name };
-            const response = await fetch("http://localhost:5000/auth/register", {
+            const response = await fetch("https://restaurant-roulette-backend.vercel.app/auth/register", {
                 method: "POST", 
                 headers: { "Content-Type": "application/json" }, 
                 body: JSON.stringify(body)

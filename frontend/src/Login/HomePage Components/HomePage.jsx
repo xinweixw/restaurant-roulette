@@ -8,7 +8,7 @@ const HomePage = ({ setAuth }) => {
 
     async function getName() {
         try {
-          const response = await fetch("http://localhost:5000/homepage/", {
+          const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
             method: "GET", 
             headers: {token: localStorage.token}
           });
