@@ -20,6 +20,10 @@ app.use('/homepage', require('./routes/homepage'));
 // errorHandler
 app.use(require('./middleware/errorHandler'));
 
+app.get("/", (req, res) => {
+    res.json("hello");
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 }); 
