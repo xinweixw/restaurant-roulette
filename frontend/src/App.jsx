@@ -36,9 +36,8 @@ function App() {
         <Fragment>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Navigate to="/login-signup" />} />
-                    <Route path="/login-signup" element={!isAuthenticated ? (<LoginSignupConnected setAuth={setAuth} />) : (<Navigate to="/homepage" />)} />
-                    <Route path="/homepage" element={isAuthenticated ? (<HomePage setAuth={setAuth} />) : (<Navigate to="/login-signup" />)} />
+                    <Route path="/" element={!isAuthenticated ? (<LoginSignupConnected setAuth={setAuth} />) : (<Navigate to="/homepage" />)} />
+                    <Route path="/homepage" element={isAuthenticated ? (<HomePage setAuth={setAuth} />) : (<Navigate to="/" />)} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                 </Routes>
             </Router>
