@@ -23,7 +23,7 @@ const Review = (props) => {
   const handleDelete = async (e, reviewid) => {
     e.stopPropagation();
     try {
-      const response = await fetch(`http://localhost:5000/api/restaurants/${id}/review/${reviewid}`, {
+      const response = await fetch(`https://restaurant-roulette-backend.vercel.app/api/restaurants/${id}/review/${reviewid}`, {
         method: "DELETE"
       });
 
