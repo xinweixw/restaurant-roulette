@@ -20,6 +20,9 @@ app.use('/homepage', require('./routes/homepage'));
 // errorHandler
 app.use(require('./middleware/errorHandler'));
 
+// get all restaurants, get a restaurant, add a food review, delete a food review
+app.use(require('./routes/restaurantRoute')); 
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 }); 
