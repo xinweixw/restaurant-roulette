@@ -8,6 +8,7 @@ import HomePage from './Login/HomePage Components/HomePage';
 import ForgotPassword from './Login/Signup Components/ForgotPassword';
 import RestaurantPage from './FoodReview/RestaurantPage';
 import { RestaurantsContextProvider } from './context/RestaurantsContext';
+import UpdateReviewPage from './FoodReview/UpdateReviewPage';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,6 +44,7 @@ function App() {
                         <Route path="/homepage" element={isAuthenticated ? (<HomePage setAuth={setAuth} />) : (<Navigate to="/" />)} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/restaurants/:id" element={<RestaurantPage />} />
+                        <Route path="/restaurants/:id/review/:reviewid" element={<UpdateReviewPage />} />
                     </Routes>
                 </Router>
                 <ToastContainer />
