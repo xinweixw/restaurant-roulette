@@ -23,6 +23,9 @@ app.use(require('./middleware/errorHandler'));
 // get all restaurants, get a restaurant, add a food review, delete a food review
 app.use(require('./routes/restaurantRoute')); 
 
+// random restaurant generator quiz
+app.use(require('./routes/randomQuizRoute'));
+
 app.get("/", (req, res) => {
     res.json("hello");
 });

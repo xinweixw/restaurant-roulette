@@ -9,6 +9,7 @@ import ForgotPassword from './Login/Signup Components/ForgotPassword';
 import RestaurantPage from './FoodReview/RestaurantPage';
 import { RestaurantsContextProvider } from './context/RestaurantsContext';
 import UpdateReviewPage from './FoodReview/UpdateReviewPage';
+import QuizPage from './RandomRestaurantGenerator/QuizPage';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,6 +46,7 @@ function App() {
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/restaurants/:id" element={<RestaurantPage />} />
                         <Route path="/restaurants/:id/review/:reviewid" element={<UpdateReviewPage />} />
+                        <Route path="/random-restaurant-generator" element={<QuizPage />} />
                     </Routes>
                 </Router>
                 <ToastContainer />
