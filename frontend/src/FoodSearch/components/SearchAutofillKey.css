@@ -1,0 +1,7 @@
+.AutofillKey {
+    padding: 10px 20px;
+}
+
+.AutofillKey:hover {
+    background-color: #efefef;
+}

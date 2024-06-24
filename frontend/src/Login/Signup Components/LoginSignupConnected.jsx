@@ -4,10 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import userIcon from '../../assets/user_image.png';
-import emailIcon from '../../assets/email_image.png';
-import passwordIcon from '../../assets/password_image.png';
-
 const LoginSignupConnected = ({ setAuth }) => {
     const [action, setAction] = useState("Sign Up");
     const navigate = useNavigate();
@@ -71,7 +67,7 @@ const LoginSignupConnected = ({ setAuth }) => {
             if (parseRes.token) {
                 localStorage.setItem("token", parseRes.token);
                 setAuth(true); 
-                navigate('/homepage');
+                navigate('/food-search');
                 toast.success('Login Successful');
             } else {
                 setAuth(false);
@@ -122,6 +118,12 @@ const LoginSignupConnected = ({ setAuth }) => {
         setWarningMessage("Please fill in all required fields.");
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            handleSubmit();
+        }
+    }
+
     return (
         <div className='container'>
             <div className='header'>
@@ -139,7 +141,7 @@ const LoginSignupConnected = ({ setAuth }) => {
                 <div className='inputs'>
                     {action === "Login" ? null : (
                         <div className="input">
-                            <img src={userIcon} alt="" />
+                            <i class='bx bx-user' alt="" />
                             <input
                                 type="text"
                                 placeholder='Name'
@@ -150,7 +152,7 @@ const LoginSignupConnected = ({ setAuth }) => {
                         </div>
                     )}
                     <div className='input'>
-                        <img src={emailIcon} alt="" />
+                        <i class='bx bx-envelope' alt="" />
                         <input
                             type="email"
                             placeholder='Email'
@@ -160,7 +162,7 @@ const LoginSignupConnected = ({ setAuth }) => {
                         />
                     </div>
                     <div className='input'>
-                        <img src={passwordIcon} alt="" />
+                        <i class='bx bxs-lock-alt' alt="" />
                         <input
                             type="password"
                             placeholder='Password'
@@ -183,15 +185,19 @@ const LoginSignupConnected = ({ setAuth }) => {
                 )}
 
                 <div className="submitContainer">
+
                 <div
                     className={`submit ${signupDisabled ? "disabled" : ""}`}
                     onClick={signupDisabled ? giveWarning : (action === "Sign Up" ? handleSubmit : handleSignup)}
+                    onKeyDown={handleKeyPress}
                     >
                     Sign Up
                 </div>
+
                 <div
                     className={`submit ${loginDisabled ? 'disabled' : ""}`}
                     onClick={loginDisabled ? giveWarning : (action === "Login" ? handleSubmit : handleLogin)}
+                    onKeyDown={handleKeyPress}
                 >
                     Login
                 </div>

@@ -50,8 +50,8 @@
     padding: 0 15px;
 }
 
-.input img {
-    width: 30px;
+.input i {
+    font-size:30px;
     margin-right: 15px;
 }
 
