@@ -4,12 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import userIcon from '../../assets/user_image.png';
-import emailIcon from '../../assets/email_image.png';
-import passwordIcon from '../../assets/password_image.png';
-
 const LoginSignupConnected = ({ setAuth }) => {
-    const [action, setAction] = useState("Sign Up");
+    const [action, setAction] = useState("Login");
     const navigate = useNavigate();
     const [loginDisabled, setLoginDisabled] = useState(true);
     const [signupDisabled, setSignupDisabled] = useState(true);
@@ -35,14 +31,12 @@ const LoginSignupConnected = ({ setAuth }) => {
     };
 
     const handleLogin = () => {
-        // Navigate to the login page
         setAction("Login");
         setSuccessMessage("");
         setWarningMessage("");
     };
 
     const handleSignup = () => {
-        // Navigate to the signup page
         setAction("Sign Up");
         setSuccessMessage("");
         setWarningMessage("");
@@ -71,7 +65,7 @@ const LoginSignupConnected = ({ setAuth }) => {
             if (parseRes.token) {
                 localStorage.setItem("token", parseRes.token);
                 setAuth(true); 
-                navigate('/homepage');
+                navigate('/food-search');
                 toast.success('Login Successful');
             } else {
                 setAuth(false);
@@ -122,6 +116,12 @@ const LoginSignupConnected = ({ setAuth }) => {
         setWarningMessage("Please fill in all required fields.");
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            handleSubmit(event);
+        }
+    }
+
     return (
         <div className='container'>
             <div className='header'>
@@ -135,11 +135,11 @@ const LoginSignupConnected = ({ setAuth }) => {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} onKeyDown={handleKeyPress}>
                 <div className='inputs'>
                     {action === "Login" ? null : (
-                        <div className="input">
-                            <img src={userIcon} alt="" />
+                        <div className="input" style={{ background: '#fff', borderRadius:10 }}>
+                            <i className='bx bx-user' alt="" />
                             <input
                                 type="text"
                                 placeholder='Name'
@@ -149,8 +149,8 @@ const LoginSignupConnected = ({ setAuth }) => {
                             />
                         </div>
                     )}
-                    <div className='input'>
-                        <img src={emailIcon} alt="" />
+                    <div className='input' style={{ background: '#fff', borderRadius:10 }}>
+                        <i className='bx bx-envelope' alt="" />
                         <input
                             type="email"
                             placeholder='Email'
@@ -159,8 +159,8 @@ const LoginSignupConnected = ({ setAuth }) => {
                             onChange={(e) => onChange(e)} 
                         />
                     </div>
-                    <div className='input'>
-                        <img src={passwordIcon} alt="" />
+                    <div className='input' style={{ background: '#fff', borderRadius:10 }}>
+                        <i className='bx bxs-lock-alt' alt="" />
                         <input
                             type="password"
                             placeholder='Password'
@@ -183,19 +183,19 @@ const LoginSignupConnected = ({ setAuth }) => {
                 )}
 
                 <div className="submitContainer">
-                <div
-                    className={`submit ${signupDisabled ? "disabled" : ""}`}
-                    onClick={signupDisabled ? giveWarning : (action === "Sign Up" ? handleSubmit : handleSignup)}
+                    <div
+                        className={`submit ${action === "Sign Up" ? "signup" : ""}`}
+                        onClick={signupDisabled ? giveWarning : (action === "Sign Up" ? handleSubmit : handleSignup)}
                     >
-                    Sign Up
+                        Sign Up
+                    </div>
+                    <div
+                        className={`submit ${action === "Login" ? "login" : ""}`}
+                        onClick={loginDisabled ? giveWarning : (action === "Login" ? handleSubmit : handleLogin)}
+                    >
+                        Login
+                    </div>
                 </div>
-                <div
-                    className={`submit ${loginDisabled ? 'disabled' : ""}`}
-                    onClick={loginDisabled ? giveWarning : (action === "Login" ? handleSubmit : handleLogin)}
-                >
-                    Login
-                </div>
-            </div>
         </div>
     );
 }

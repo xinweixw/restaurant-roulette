@@ -36,6 +36,7 @@
     margin-top: 55px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 25px;
 }
 
@@ -46,12 +47,12 @@
     max-width: 480px;
     height: 60px;
     background: #fff;
-    border-radius: 6px;
+    border-radius: 10px;
     padding: 0 15px;
 }
 
-.input img {
-    width: 30px;
+.input i {
+    font-size: 30px;
     margin-right: 15px;
 }
 
@@ -79,9 +80,12 @@
 
 .submitContainer {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 60px auto;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+    gap: 20px;
+    padding-top: 30px;
+    margin: auto;
 }
 
 .submit {
@@ -93,9 +97,21 @@
     font-size: 19px;
     font-weight: 800;
     cursor: pointer;
-    display: flex; /* Ensure button is a flex container */
-    justify-content: center; /* Center text horizontally */
-    align-items: center; /* Center text vertically */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.submit:hover {
+    background-color: orange;
+}
+
+.submit.login {
+    border: 2px solid orange;
+}
+
+.submit.signup {
+    border: 2px solid orange;
 }
 
 .gray {

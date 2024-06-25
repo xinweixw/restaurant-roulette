@@ -1,0 +1,9 @@
+.autofill-list {
+    width: 100%;
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-top: 1px;
+    overflow-y:hidden;
+}

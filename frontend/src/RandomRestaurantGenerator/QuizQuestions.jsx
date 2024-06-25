@@ -7,6 +7,7 @@ const QuizQuestions = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [recommendation, setRecommendation] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,6 +19,7 @@ const QuizQuestions = () => {
 
         const getData = async () => {
             try {
+                setLoading(true);
                 const response = await RandomQuizBackend.get("/", {
                     headers: {
                         token: token
@@ -27,6 +29,8 @@ const QuizQuestions = () => {
                 setAnswers(Array(response.data.data.length).fill(null));
             } catch (err) {
                 console.error(err.message);
+            } finally {
+                setLoading(false);
             }
         }
         getData();
@@ -60,6 +64,12 @@ const QuizQuestions = () => {
         const newAnswer = [...answers];
         newAnswer[index] = value;
         setAnswers(newAnswer);
+    }
+
+    if (loading) {
+        return (<h1 className="loadIcon">
+          <i className="bx bx-loader-circle bx-spin"/>
+          </h1>);
     }
 
     return (

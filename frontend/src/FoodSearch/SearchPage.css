@@ -1,0 +1,28 @@
+.App {
+  background-color: #eee;
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.AppLogo {
+  padding-top: 10vh;
+  font-size: 50px;
+  align-items: center;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-variant: small-caps;
+  color: orange;
+}
+
+.search-bar-container {
+  padding-top: 7vh;
+  width: 85%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+}

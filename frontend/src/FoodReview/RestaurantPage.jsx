@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import StarRating from './StarRating';
 import Review from './Review';
 import RestaurantInfo from './RestaurantInfo';
@@ -9,24 +9,35 @@ import AddReview from './AddReview';
 // import Drawer from '@mui/material/Drawer';
 
 
-const RestaurantPage = () => {
+const RestaurantPage = () => { 
   const { id } = useParams();
   const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantsContext);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
       try {
+        setLoading(true); // Start loading
         const response = await RestaurantBackend.get(`/${id}`); 
         console.log('Fetched data:', response.data);
-        setSelectedRestaurant(response.data.data)
+        setSelectedRestaurant(response.data.data);
       } catch (err) {
         console.error(err.message);
+      } finally {
+        setLoading(false); // End loading
       }
     }; 
 
     getData();
   }, [id]);
+
+  if (loading) {
+    return (<h1 className="loadIcon">
+      <i className="bx bx-loader-circle bx-spin"/>
+      </h1>);
+  }
+
 
   return (
     <div>
@@ -43,7 +54,6 @@ const RestaurantPage = () => {
             <Review  />
           </div>
           <AddReview />
-          <button onClick={e => navigate("/homepage")} className="btn btn-info">Back to Homepage</button>
         </>
       )}
     </div>

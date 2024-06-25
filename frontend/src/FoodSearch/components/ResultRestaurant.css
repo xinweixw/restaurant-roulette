@@ -1,0 +1,59 @@
+.ResultRestaurantKey {
+    width: 100%;
+    padding: 10px 20px;
+    background-color:blanchedalmond;
+    margin: 8px;
+    border-radius: 8px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    height: 10rem;
+}
+
+.ResultRestaurantKey:hover {
+    background-color: orange;
+}
+
+.restImage {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+.row1 {
+    align-items: center;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.restName {
+    width: 100%;
+    align-items: left;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.cuisine {
+    width: 100%;
+    align-items: left;
+    margin-left: 20px;
+}
+
+.priceRange {
+    width: 10px;
+    align-items: left;
+    margin-left: 10px;
+}
+
+.rating {
+    width: 100%;
+    align-items: right;
+    margin-left: 10px;
+}
+
+.cuisine, .priceRange, .rating {
+    color: #666;
+}
