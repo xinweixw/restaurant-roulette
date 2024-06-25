@@ -15,7 +15,7 @@ const QuizPage = () => {
             {/* Corrected onClick handler */}
             <button onClick={() => navigate("/random-restaurant-generator/quiz-questions")}>Start Quiz</button>
             <br />
-            <button onClick={() => navigate("/homepage")} className="btn btn-info">Back to Homepage</button>
+            {/* <button onClick={() => navigate("/food-search")} className="btn btn-info my-2">Back to Homepage</button> */}
         </>
     )
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import "./ResultRestaurant.css";
+import StarRating from '../../FoodReview/StarRating';
 
 export const ResultRestaurant = ({ result, onSelect }) => {
     return (
@@ -8,7 +9,7 @@ export const ResultRestaurant = ({ result, onSelect }) => {
             <div className='row1'>
                 <div className="restName">{result.rest_name}</div>
                 <div className="priceRange">{result.rest_price}</div>
-                <div className="rating">{result.rating}</div>
+                <div className="rating"><StarRating stars={result.average_star} /> {result.average_star} ({result.num_review})</div>
                 <div className="cuisine">{result.cuisine}</div>
                 <div className='location'>{result.rest_location}</div>
             </div>
