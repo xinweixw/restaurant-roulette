@@ -3,10 +3,12 @@ import StarRating from './StarRating';
 import { useNavigate, useParams } from 'react-router-dom';
 import RestaurantBackend from '../apis/RestaurantBackend';
 import { RestaurantsContext } from '../context/RestaurantsContext';
+import { toast } from 'react-toastify';
 
 const Review = (props) => {
   const { id } = useParams();
   const { revs, setReviews, addReviews } = useContext(RestaurantsContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -21,16 +23,52 @@ const Review = (props) => {
   },[]);
 
   const handleDelete = async (e, reviewid) => {
-    e.stopPropagation();
-    try {
-      const response = await fetch(`https://restaurant-roulette-backend.vercel.app/api/restaurants/${id}/review/${reviewid}`, {
-        method: "DELETE"
-      });
+    e.stopPropagation(); 
+    const token = localStorage.getItem("token");
 
-      useNavigate("/homepage");
-    
+    if (!token) {
+      toast.error("You must be logged in to delete a review!");
+    }
+
+    try {
+      const response = await RestaurantBackend.delete(`/${id}/review/${reviewid}`, {
+        headers: {
+          token: token
+        }
+      });
+      
+      setReviews(revs.filter(review => {
+        return review.review_id !== reviewid
+      }));
+
+      toast("Review deleted!");
+      
+
     } catch (err) {
       console.error(err.message);
+      toast.warning("You cannot delete this review!");
+    }
+  }
+
+  const handleUpdate = async (e, restid, reviewid) => {
+    e.stopPropagation();
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      toast.error("You must be logged in to update a review!");
+    }
+
+    try {
+      const response = await RestaurantBackend.get(`/${id}/review/${reviewid}`, {
+        headers: {
+            token: token
+        }
+      }); 
+
+      navigate(`/restaurants/${restid}/review/${reviewid}`);
+    } catch (err) {
+      console.error(err.message);
+      toast.warning("You cannot update this review");
     }
   };
 
@@ -45,7 +83,8 @@ const Review = (props) => {
             </div>
             <div className="card-body">
               <p className="card-text">{review.review}</p>
-              <div onClick={e => handleDelete(e, review.review_id)} className="btn btn-warning">Delete</div>
+              <button onClick={e => handleUpdate(e, review.rest_id, review.review_id)} className="btn btn-info me-2">Update</button>
+              <button onClick={e => handleDelete(e, review.review_id)} className="btn btn-warning me-2">Delete</button>
             </div>
           </div>
         )

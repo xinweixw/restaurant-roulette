@@ -10,6 +10,7 @@ import ForgotPassword from './Login/Signup Components/ForgotPassword';
 import RestaurantPage from './FoodReview/RestaurantPage';
 import SearchPage from './FoodSearch/SearchPage'
 import { RestaurantsContextProvider } from './context/RestaurantsContext';
+<<<<<<< HEAD
 //import UpdateReviewPage from './FoodReview/UpdateReviewPage';
 //import QuizPage from './RandomRestaurantGenerator/QuizPage';
 import { SideBar } from './SideBar/SideBar';
@@ -27,6 +28,10 @@ const Layout = ({ children, setAuth }) => (
         </div>
     </div>
 );
+=======
+import UpdateReviewPage from './FoodReview/UpdateReviewPage';
+import QuizPage from './RandomRestaurantGenerator/QuizPage';
+>>>>>>> origin/main
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -61,11 +66,17 @@ function App() {
                         <Route path="/" element={!isAuthenticated ? (<LoginSignupConnected setAuth={setAuth} />) : (<Navigate to="/food-search" />)} />
                         <Route path="/homepage" element={isAuthenticated ? (<Layout setAuth={setAuth}> <HomePage setAuth={setAuth} /> </Layout>) : (<Navigate to="/" />)} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
+<<<<<<< HEAD
                         <Route path="/food-search" element={isAuthenticated ? (<Layout setAuth={setAuth}> <SearchPage setAuth={setAuth} /> </Layout>) : (<Navigate to="/" />)} />
                         <Route path="/restaurants/:id" element={isAuthenticated ? (<Layout setAuth={setAuth}> <RestaurantPage setAuth={setAuth} /> </Layout>) : (<Navigate to="/" />)} />
                         <Route path="/what's-new" element={isAuthenticated ? (<Layout setAuth={setAuth}><div>What's New</div></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/favourites" element={isAuthenticated ? (<Layout setAuth={setAuth}><div>Favourites</div></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/bite-buddies" element={isAuthenticated ? (<Layout setAuth={setAuth}><div>Bite Buddies</div></Layout>) : (<Navigate to="/" />)} />
+=======
+                        <Route path="/restaurants/:id" element={<RestaurantPage />} />
+                        <Route path="/restaurants/:id/review/:reviewid" element={<UpdateReviewPage />} />
+                        <Route path="/random-restaurant-generator" element={<QuizPage />} />
+>>>>>>> origin/main
                     </Routes>
                 </Router>
                 <ToastContainer />
