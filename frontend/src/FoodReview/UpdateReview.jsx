@@ -52,7 +52,7 @@ const UpdateReview = (props) => {
                 <div className="container">
                     <div className="mb-2">
                         <label htmlFor="star">Rating</label>
-                        <select className="form-select" value={star} onChange={e => setStar(e.target.value)} id="star" type="text">
+                        <select className="form-select" value={star} onChange={e => setStar(e.target.value)} id="star" type="text" required>
                             <option disabled>Rating</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -64,7 +64,7 @@ const UpdateReview = (props) => {
                     <div className="mb-2">
                         <label htmlFor="review">Review</label>
                         <textarea value={reviewField} onChange={e => setReviewField(e.target.value)}
-                            id="review" className="form-control"></textarea>
+                            id="review" className="form-control" required></textarea>
                     </div>
                     <button type="submit" className="btn btn-info">Update Review</button>
                 </div>

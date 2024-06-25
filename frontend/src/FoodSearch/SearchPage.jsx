@@ -25,7 +25,7 @@ const SearchPage = () => {
     }, []);
 
     const fetchAllRestaurants = async () => {
-        const { data, error } = await supabase.from('restaurants').select('*');
+        const { data, error } = await supabase.from('restaurants_with_ratings').select('*');
         if (error) {
             console.error("Error fetching data: ", error);
         } else {
@@ -35,7 +35,7 @@ const SearchPage = () => {
     };
 
     const fetchFilteredRestaurants = async () => {
-        let query = supabase.from('restaurants').select('*');
+        let query = supabase.from('restaurants_with_ratings').select('*');
 
         if (selectedFilters.length > 0) {
             const specialConditions = selectedFilters.filter(filter => specialFilters.includes(filter));
