@@ -5,6 +5,7 @@ import profilePic from '../assets/chef_image.png';
 
 export const SideBar = ({setAuth}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [name, setName] = useState("");
     const navigate = useNavigate();
 
     const toggleSidebar = () => {
@@ -23,7 +24,7 @@ export const SideBar = ({setAuth}) => {
 
     const handleRoulette = () => {
         setIsOpen(false);
-        navigate('/roulette');
+        navigate('/random-restaurant-generator');
     };
 
     const handleBiteBuddies = () => {
@@ -36,6 +37,26 @@ export const SideBar = ({setAuth}) => {
         navigate('/favourites');
     };
 
+    async function getName() {
+        try {
+          const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
+            method: "GET", 
+            headers: {token: localStorage.token}
+          });
+    
+          const parseRes = await response.json();
+          setName(parseRes.user_name);
+    
+        } catch (err) {
+          console.error(err.message);
+        }
+      };
+      
+      // useEffect makes a lot of request so adding the [] helps make sure only 1 request is made
+      useEffect(() => {
+        getName();
+      },[]);
+    
 
     const logout = (e) => {
         e.preventDefault();
@@ -56,7 +77,7 @@ export const SideBar = ({setAuth}) => {
                 <div className="user">
                     <img src={profilePic} alt="profilePic" className="profilePic" />
                     <div>
-                        <p className="bold">Username</p>
+                        <p className="bold">{name}</p>
                     </div>
                 </div>
 

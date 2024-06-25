@@ -1,20 +1,21 @@
-import React from 'react';
-import QuizQuestions from './QuizQuestions'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const QuizPage = () => {
-    let navigate = useNavigate();
+    const navigate = useNavigate(); // Corrected declaration
+
     return (
         <>
             <div className="container text-center my-3">
-                <i class="fa-solid fa-mug-saucer"></i>
+                <i className="fa-solid fa-mug-saucer"></i>
                 <h1>Random Restaurant Generator</h1>
-                <i class="fa-solid fa-burger"></i>
+                <i className="fa-solid fa-burger"></i>
                 <span className="my-3">take a short quiz & get a restaurant</span>
             </div>
-            <QuizQuestions />
+            {/* Corrected onClick handler */}
+            <button onClick={() => navigate("/random-restaurant-generator/quiz-questions")}>Start Quiz</button>
             <br />
-            <button onClick={e => navigate("/homepage")} className="btn btn-info">Back to Homepage</button>
+            <button onClick={() => navigate("/homepage")} className="btn btn-info">Back to Homepage</button>
         </>
     )
 }

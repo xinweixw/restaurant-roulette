@@ -10,6 +10,7 @@ export const ResultRestaurant = ({ result, onSelect }) => {
                 <div className="priceRange">{result.rest_price}</div>
                 <div className="rating">{result.rating}</div>
                 <div className="cuisine">{result.cuisine}</div>
+                <div className='location'>{result.rest_location}</div>
             </div>
         </div>
     );
