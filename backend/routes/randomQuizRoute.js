@@ -75,7 +75,7 @@ router.post('/api/quiz/submit', async (req, res) => {
             const restaurantScoreInterval = (maxScore - minScore) / numRestaurants;
 
             const recIndex = Math.ceil(score / restaurantScoreInterval);
-            const rec = restaurantsData[recIndex];
+            const rec = restaurantsData[recIndex - 1];
             res.status(200).json({
                 status: "success",
                 data: rec
