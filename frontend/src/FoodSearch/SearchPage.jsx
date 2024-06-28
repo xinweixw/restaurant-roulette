@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const specialFilters = ['Halal', 'Vegetarian', 'Vegan'];
 const priceFilters = ['$', '$$', '$$$', '$$$$'];
 const cuisineFilters = ['Singaporean', 'Chinese', 'Western', 'Thai', 'Japanese', 'Korean'];
+const locationFilters = ['Bukit Timah', 'Yishun', 'Orchard', 'Kallang', 'Changi', 'Clementi', 'Bukit Merah', 'Toa Payoh', 'Hougang', 'Jurong'];
 
 const SearchPage = () => {
     const [results, setResults] = useState([]);
@@ -41,6 +42,7 @@ const SearchPage = () => {
             const specialConditions = selectedFilters.filter(filter => specialFilters.includes(filter));
             const priceConditions = selectedFilters.filter(filter => priceFilters.includes(filter));
             const cuisineConditions = selectedFilters.filter(filter => cuisineFilters.includes(filter));
+            const locationConditions = selectedFilters.filter(filter => locationFilters.includes(filter));
 
             if (specialConditions.length > 0) {
                 query = query.in('special_conditions', specialConditions);
@@ -50,6 +52,9 @@ const SearchPage = () => {
             }
             if (cuisineConditions.length > 0) {
                 query = query.in('cuisine', cuisineConditions);
+            }
+            if (locationConditions.length > 0) {
+                query = query.in('rest_location', locationConditions);
             }
         }
 

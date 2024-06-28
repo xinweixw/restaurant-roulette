@@ -53,7 +53,7 @@ export const FilterList = ({ selectedFilters, onSelectFilter }) => {
             </div>
 
             <div className="locationFilters">
-            {/*location filters
+            {/* location filters */}
             {locationFilters.map((filter, id) => (
                 <button 
                     className={`filter-button ${selectedFilters.includes(filter) ? 'selected' : ''}`}
@@ -63,7 +63,7 @@ export const FilterList = ({ selectedFilters, onSelectFilter }) => {
                     {filter}
                 </button>
             ))}
-                */}
+               
             </div>
 
 
