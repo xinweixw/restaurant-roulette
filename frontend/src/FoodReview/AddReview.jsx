@@ -47,6 +47,7 @@ const AddReview = () => {
 
     return (
         <div className="my-2">
+            <h2>Leave a Review</h2>
             <form onSubmit={handleSubmit}>
                 <div className="container">
                     <div className="mb-2">
