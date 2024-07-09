@@ -5,8 +5,6 @@ const dotenv = require('dotenv');
 dotenv.config(); 
 const port = process.env.PORT; 
 
-//const whatnew = require('./controllers/whatnew');
-
 // Body parser middleware 
 app.use(express.json());
 app.use(cors());
@@ -31,11 +29,11 @@ app.use(require('./routes/randomQuizRoute'));
 // get all folders
 app.use(require('./routes/favouriteRoute'));
 
-// automated web scraping
-//app.use('/whatnew', whatnew);
+// get automated web scraping
+app.use('/whatnewcron', require('./controllers/whatnew'));
 
-// get all new restaurants 
-// app.use(require('./routes/whatsnewRoute'));
+// get all new restaurants
+app.use(require('./routes/whatsnewRoute'));
 
 app.get("/", (req, res) => {
     res.json("hello");

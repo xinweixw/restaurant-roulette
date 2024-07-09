@@ -8,5 +8,11 @@
             "src": "/(.*)",
             "dest": "/"
         }
+    ], 
+    "crons" : [
+        {
+            "path": "/whatnewcron",
+            "schedule": "0 10 9 * *"
+        }
     ]
 }

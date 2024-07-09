@@ -16,6 +16,9 @@ const FolderPage = () => {
   const [fName, setFName] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
+  // handle popup button for delete
+  const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -87,6 +90,8 @@ const FolderPage = () => {
         }
       }); 
 
+      setIsDeleting(false);
+
       navigate("/favourites");
     } catch (err) {
       console.error(err.message);
@@ -100,7 +105,7 @@ const FolderPage = () => {
       <br />
       {selectedFolder && selectedFolder.folder_name !== "All" ? (<button onClick={() => setIsClicked(true)} className="btn btn-primary">Edit Folder</button>) : 
       ""}
-      {selectedFolder && selectedFolder.folder_name !== "All" ? (<button onClick={(e) => handleDelete(e)} className="btn btn-secondary ms-2">Delete Folder <i className="fa-solid fa-trash"></i></button>) : 
+      {selectedFolder && selectedFolder.folder_name !== "All" ? (<button onClick={() => setIsDeleting(true)} className="btn btn-secondary ms-2">Delete Folder <i className="fa-solid fa-trash"></i></button>) : 
       ""}
       <br /><br />
 
@@ -124,6 +129,13 @@ const FolderPage = () => {
           {errMsg && <p>{errMsg}</p>}
           <button onClick={handleSubmit} className="btn btn-primary ms-2" type="submit">Edit</button>
         </form>
+      </Popup>
+
+      <Popup isClicked={isDeleting} setIsClicked={setIsDeleting} >
+        <div>
+          <p>Are you sure you want to delete this folder?</p>
+          <button onClick={(e) => handleDelete(e)} className="btn btn-primary ms-2">Yes</button>
+        </div>
       </Popup>
 
     </div>
