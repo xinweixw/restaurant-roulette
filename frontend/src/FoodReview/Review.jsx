@@ -73,10 +73,12 @@ const Review = (props) => {
   };
 
   return (
-    <div className="row row-cols-3 mb-2">
+    <div className="row">
+       {/* row-cols-3 mb-2 */}
+      {revs.length >= 1 ? (<h2 className="text-start justify-content-start">Reviews: </h2>) : ""}
       {revs.map((review) => {
         return (
-          <div key={review.review_id} className="card border-warning-subtle mb-3 me-4" style={{ maxWidth: "30%" }}>
+          <div key={review.review_id} className="card border-warning-subtle mb-3 me-4">
             <div className="card-header d-flex justify-content-between">
               <span>{review.user_name}</span>
               <span><StarRating stars={review.star} /></span>
