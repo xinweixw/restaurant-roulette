@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FavouritesBackend from '../apis/FavouritesBackend';
+import { toast } from 'react-toastify';
 
 const AddNewFolder = ({setIsClicked, createNewFolder}) => {
     const [fName, setFName] = useState("");
@@ -29,6 +30,7 @@ const AddNewFolder = ({setIsClicked, createNewFolder}) => {
                     }
                 }); 
                 createNewFolder(response.data.data.folder);
+                toast("New folder created!");
             } catch (err) {
                 console.log(err);
             }
