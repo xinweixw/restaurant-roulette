@@ -6,14 +6,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 import RestaurantBackend from '../apis/RestaurantBackend';
 import AddReview from './AddReview';
-// import Drawer from '@mui/material/Drawer';
-
 
 const RestaurantPage = () => { 
   const { id } = useParams();
   const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantsContext);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -33,11 +30,12 @@ const RestaurantPage = () => {
   }, [id]);
 
   if (loading) {
-    return (<h1 className="loadIcon">
-      <i className="bx bx-loader-circle bx-spin"/>
-      </h1>);
+    return (
+      <h1 className="loadIcon">
+        <i className="bx bx-loader-circle bx-spin"/>
+      </h1>
+    );
   }
-
 
   return (
     <div>
@@ -48,10 +46,10 @@ const RestaurantPage = () => {
             <StarRating stars={selectedRestaurant.restaurant.average_star} />
             <span className="text-warning ms-1">
               {selectedRestaurant.restaurant.num_review ? `(${selectedRestaurant.restaurant.num_review})` : "(0)"}
-            </span>reviews={selectedRestaurant.reviews}
+            </span>
           </div> */}
           <div className="my-3">
-            <Review  />
+            <Review />
           </div>
           <AddReview />
         </>
