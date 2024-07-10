@@ -26,6 +26,15 @@ app.use(require('./routes/restaurantRoute'));
 // random restaurant generator quiz
 app.use(require('./routes/randomQuizRoute'));
 
+// get all folders
+app.use(require('./routes/favouriteRoute'));
+
+// get automated web scraping
+app.use('/whatnewcron', require('./controllers/whatnew'));
+
+// get all new restaurants
+app.use(require('./routes/whatsnewRoute'));
+
 app.get("/", (req, res) => {
     res.json("hello");
 });
