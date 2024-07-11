@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@sparticuz/chromium": "^123.0.1",
     "@supabase/supabase-js": "^2.43.4",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -20,6 +21,6 @@
     "node-cron": "^3.0.3",
     "pg": "^8.11.5",
     "puppeteer": "^22.12.1",
-    "puppeteer-core": "^22.12.1"
+    "puppeteer-core": "=10.2.0"
   }
 }
