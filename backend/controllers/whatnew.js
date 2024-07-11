@@ -34,11 +34,11 @@ router.get('/whatnewcron', async (req, res) => {
 
         if (openingsError) throw openingsError;
 
-        const { data: updatedOpenings, error: updatedError } = await supabase.from('restaurants')
-            .update({ is_new: false })
-            .eq('is_new', true);
+        // const { data: updatedOpenings, error: updatedError } = await supabase.from('restaurants')
+        //     .update({ is_new: false })
+        //     .eq('is_new', true);
 
-        if (updatedError) throw updatedError;
+        // if (updatedError) throw updatedError;
 
         // console.log("updated");
         res.status(200).json({
