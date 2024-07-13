@@ -91,7 +91,7 @@ const RestaurantPage = () => {
           <div className="my-3 p-3">
             <AddReview />
           </div>
-          <Review  />
+          <Review />
 
           <Popup isClicked={isClicked} setIsClicked={setIsClicked}>
             <AddToFavourite favFolders={favFolder} setFavFolder={setFavFolder} addInFav={addInFav} setIsClicked={setIsClicked} />
