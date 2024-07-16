@@ -3,11 +3,19 @@ const app = express();
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config(); 
-const port = process.env.PORT; 
+const port = process.env.PORT || 5000;
 
 // Body parser middleware 
 app.use(express.json());
 app.use(cors());
+
+// Configure CORS
+const corsOptions = {
+    origin: 'http://localhost:5173',  // Replace with your frontend URL
+    credentials: true,  // Required to allow cookies and authorization headers
+};
+app.use(cors(corsOptions));
+
 
 // Routes 
 
@@ -34,6 +42,9 @@ app.use('/whatnewcron', require('./controllers/whatnew'));
 
 // get all new restaurants
 app.use(require('./routes/whatsnewRoute'));
+
+// bite buddies
+app.use('/bite-buddies', require('./routes/groupRoutes'));
 
 app.get("/", (req, res) => {
     res.json("hello");

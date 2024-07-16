@@ -19,6 +19,7 @@ import FolderPage from './Favourites/FolderPage';
 import WhatsNewPage from './WhatsNew/WhatsNewPage';
 import BiteBuddies from './BiteBuddies/BiteBuddiesPage';
 import CreateNewGroup from './BiteBuddies/Components/CreateNewGroup'
+import GroupPage from './BiteBuddies/Components/GroupPage';
 
 
 // Sidebar layout
@@ -78,6 +79,8 @@ function App() {
 
                         <Route path="/bite-buddies" element={isAuthenticated ? (<Layout setAuth={setAuth}> <BiteBuddies setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/bite-buddies/create-new-group" element={isAuthenticated ? (<Layout setAuth={setAuth}> <CreateNewGroup setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
+                        <Route path="/bite-buddies/group/:id" element={isAuthenticated ? (<Layout setAuth={setAuth}> <GroupPage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
+
 
                     </Routes>
                 </Router>

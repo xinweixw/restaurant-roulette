@@ -21,7 +21,7 @@ const SearchUsers = ({ groupMembers, currentUser, input, onAddMember }) => {
     const filteredUserList = userList
         .filter((user) =>
             user.user_name.toLowerCase().includes(input.toLowerCase()) &&
-            user.user_id !== currentUser.user_id && // Exclude current user
+            user.user_id !== currentUser && // Exclude current user
             !groupMembers.some(member => member.user_id === user.user_id) // Exclude members already in the group
         )
         .slice(0, 4);
