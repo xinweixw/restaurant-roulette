@@ -54,7 +54,7 @@ const RestaurantInfo = ({oneRestaurant, setIsClicked, inFav, setInFav, addFavFol
       <div key={oneRestaurant.rest_id} className="text-center">
         <div className="row">
           <div className="col">
-            <img src={oneRestaurant.image_url} className="img-thumbnail rounded float-end" alt="Food place logo" />
+            <img src={oneRestaurant.image_url} className="img-thumbnail rounded float-end" alt="Food place logo" style={{maxWidth: "90%"}}/>
           </div>
           <div className="col text-center">
             <h4 className="display-4">{oneRestaurant.rest_name}</h4>
