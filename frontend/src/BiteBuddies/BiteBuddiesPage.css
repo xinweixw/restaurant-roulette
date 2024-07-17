@@ -1,0 +1,41 @@
+.groupTabContainer {
+    width: 100px;
+    height: 50px;
+    background-color: #ffda8b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.groupTabContainer:hover {
+    background-color: orange;
+    border: 1px solid orangered;
+}
+
+.groups {
+    display: flex;
+    position:relative;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.groupName {
+    align-items: center;
+}
+
+.TopicName {
+    padding-top: 10vh;
+    font-size: 50px;
+    align-items: center;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-variant: small-caps;
+    color: orange;
+}
+
+.header{
+    font-size: 20px;
+}
