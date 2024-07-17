@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import './JoinCollab.css';
 import supabase from '../../FoodSearch/config/SupabaseClient';
+import BiteBuddiesBackend from '../../apis/BiteBuddiesBackend';
 
 const JoinCollab = () => {
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedOption, setSelectedOption] = useState("");
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
-        // fetch options when selectedCategory changes
-        if (selectedCategory) {
-            fetchOptions(selectedCategory);
-        }
-    }, [selectedCategory]);
+        console.log('Options updated:', options);
+    }, [options]);
 
-    const handleCategoryChange = (e) => {
-        setSelectedCategory(e.target.value);
-        //setShowOptions(false); // reset showOptions when category changes
-        setSelectedOption('');
+    const handleCategoryChange = async (e) => {
+        const category = e.target.value;
+        setSelectedCategory(category);
+        console.log('Selected Category:', category);
+
+        if (category === 'location') {
+            const locationRes = await BiteBuddiesBackend.get("/location");
+            const locations = locationRes.data.data;
+            setOptions(locations.map(location => location.rest_location));
+            console.log('Setting options to locations:', options);
+            // setOptions(selectedLocation);
+        } else if (category === 'price') {
+            const priceRes = await BiteBuddiesBackend.get("/price");
+            const prices = priceRes.data.data;
+            setOptions(prices.map(price => price.rest_price));
+            console.log('Setting options to prices:', options);
+            // setOptions(selectedPrice);
+        } else if (category === 'cuisine') {
+            const cuisineRes = await BiteBuddiesBackend.get("/cuisine");
+            const cuisines = cuisineRes.data.data;
+            setOptions(cuisines.map(cuisine => cuisine.cuisine));
+            console.log('Setting options to cuisines:', options);
+            //setOptions(selectedCuisine);
+        } else {
+            setOptions([]);
+        }
     };
 
     const handleOptionChange = (e) => {
@@ -26,35 +45,13 @@ const JoinCollab = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
+        console.log('Submitted');
         console.log('Selected category:', selectedCategory);
         console.log('Selected option:', selectedOption);
     };
 
-    const fetchOptions = async (type) => {
-        try {
-            // Fetch unique options based on the selected category
-            const { data, error } = await supabase
-                .from('bite_buddies_quiz')
-                .select(type);
-    
-            if (error) {
-                console.error('Error fetching options:', error.message);
-                throw error;
-            }
-    
-            const options = data.map(item => item[type]);
-    
-            console.log('Unique options:', options);
-            setOptions(options);
-        } catch (error) {
-            console.error('Error fetching options:', error.message);
-        }
-    };
-    
-
     return (
-        <div className="Container">
+        <div className="container">
             <h2>Collaboration has started!</h2>
             
             <form onSubmit={handleSubmit}>
@@ -62,37 +59,34 @@ const JoinCollab = () => {
                     <label htmlFor="categoryOptions">Select a category:</label>
                     <select
                         id="categoryOptions"
-                        className="form-control"
+                        className="form-select"
                         value={selectedCategory}
                         onChange={handleCategoryChange}
                         required
                     >
-                        <option value="">Select a category...</option>
+                        <option value="" disabled>Select a category...</option>
                         <option value="cuisine">Cuisine</option>
                         <option value="price">Price</option>
                         <option value="location">Location</option>
                     </select>
 
-                    
-                        <div>
-                            <label htmlFor="collabOptions">Select an option:</label>
-                            <select
-                                id="collabOptions"
-                                className="form-control"
-                                value={selectedOption}
-                                onChange={handleOptionChange}
-                                required
-                            >
-                                <option value="">Select...</option>
-                                {options.map((option, index) => (
-                                    <option key={index} value={option}>
-                                        {option}
-                                    </option>
-                                ))}
-                            </select>
-
-                        </div>
-                    
+                    <div>
+                        <label htmlFor="collabOptions">Select an option:</label>
+                        <select
+                            id="collabOptions"
+                            className="form-select"
+                            value={selectedOption}
+                            onChange={handleOptionChange}
+                            required
+                        >
+                            <option value="">Select...</option>
+                            {options.length > 0 && options.map((option, index) => (
+                                <option key={index} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

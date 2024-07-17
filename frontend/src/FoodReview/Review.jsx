@@ -11,6 +11,7 @@ const Review = (props) => {
   const { revs, setReviews, addReviews } = useContext(RestaurantsContext);
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [deleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -37,21 +38,7 @@ const Review = (props) => {
     }
     getData();
     getName();
-  }, [id]); // Add 'id' as a dependency
-
-  async function getName() {
-    try {
-      const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
-        method: "GET", 
-        headers: { token: localStorage.token }
-      });
-
-      const parseRes = await response.json();
-      setName(parseRes.user_name);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  },[id]); // Add 'id' as a dependency
 
   const handleDelete = async (e, reviewid) => {
     e.stopPropagation(); 
@@ -63,16 +50,25 @@ const Review = (props) => {
     }
 
     try {
-      await RestaurantBackend.delete(`/${id}/review/${reviewid}`, {
-        headers: { token: token }
+      const response = await RestaurantBackend.delete(`/${id}/review/${reviewid}`, {
+        headers: {
+          token: token
+        }
       });
       
-      setReviews(revs.filter(review => review.review_id !== reviewid));
+      setReviews(revs.filter(review => {
+        return review.review_id !== reviewid
+      }));
+
+      setIsDeleting(false);
+
       toast("Review deleted!");
+      
+
     } catch (err) {
       console.error(err.message);
       toast.warning("You cannot delete this review!");
-    } 
+    }
   }
 
   const handleUpdate = async (e, restid, reviewid) => {
@@ -85,8 +81,10 @@ const Review = (props) => {
     }
 
     try {
-      await RestaurantBackend.get(`/${id}/review/${reviewid}`, {
-        headers: { token: token }
+      const response = await RestaurantBackend.get(`/${id}/review/${reviewid}`, {
+        headers: {
+            token: token
+        }
       }); 
 
       navigate(`/restaurants/${restid}/review/${reviewid}`);
@@ -97,29 +95,37 @@ const Review = (props) => {
   };
 
   return (
-    <div className="row">
-       {/* row-cols-3 mb-2 */}
-      {revs.length >= 1 ? (<h2 className="text-start justify-content-start">Reviews: </h2>) : ""}
-      {revs.map((review) => {
-        return (
-          <div key={review.review_id} className="card border-warning-subtle mb-3 me-4">
-            <div className="card-header d-flex justify-content-between">
-              <span>{review.user_name}</span>
-              <span><StarRating stars={review.star} /></span>
-            
-          </div>
-          <div className="card-body">
-            <p className="card-text">{review.review}</p>
-            {review.user_name === name && (
-              <div>
-                <button onClick={e => handleUpdate(e, review.rest_id, review.review_id)} className="btn btn-info me-2">Update</button>
-                <button onClick={e => handleDelete(e, review.review_id)} className="btn btn-warning me-2">Delete</button>
+    <>
+      <div className="row">
+        {/* row-cols-3 mb-2 */}
+        {revs.length >= 1 ? (<h2 className="text-start justify-content-start">Reviews: </h2>) : ""}
+        {revs.map((review) => {
+          return (
+            <div key={review.review_id} className="card border-warning-subtle mb-3 me-4">
+              <div className="card-header d-flex justify-content-between">
+                <span>{review.user_name}</span>
+                <span><StarRating stars={review.star} /></span>
               </div>
-            )}
-          </div>
-        </div>
-      )})}
-    </div>
+              <div className="card-body">
+                <p className="card-text">{review.review}</p>
+                {review.user_name === name && (
+                  <div>
+                    <button onClick={e => handleUpdate(e, review.rest_id, review.review_id)} className="btn btn-info me-2">Update</button>
+                    <button onClick={() => setIsDeleting(true)} className="btn btn-warning me-2">Delete</button>
+                    <Popup isClicked={deleting} setIsClicked={setIsDeleting}>
+                      <div>
+                        <p>Are you sure you want to delete this review?</p>
+                        <button onClick={e => handleDelete(e, review.review_id)} className="btn btn-warning me-2">Confirm Delete</button>
+                      </div>
+                    </Popup>
+                  </div>
+                )}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </>
   ); 
 }
 
