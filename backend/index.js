@@ -35,6 +35,12 @@ app.use(require('./controllers/whatnew'));
 // get all new restaurants
 app.use(require('./routes/whatsnewRoute'));
 
+// bite buddies
+app.use(require('./routes/biteBuddiesRoute'));
+
+// notifications 
+app.use(require('./routes/notificationRoute'));
+
 app.get("/", (req, res) => {
     res.json("hello");
 });

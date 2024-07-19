@@ -18,6 +18,7 @@ import FavouritePage from './Favourites/FavouritePage';
 import FolderPage from './Favourites/FolderPage';
 import WhatsNewPage from './WhatsNew/WhatsNewPage';
 import QuizForm from './RandomRestaurantGenerator/QuizForm';
+import NotificationPage from './Notification/NotificationPage';
 
 
 // Sidebar layout
@@ -76,6 +77,8 @@ function App() {
                         <Route path="/favourites/:id" element={isAuthenticated ? (<Layout setAuth={setAuth}><FolderPage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/bite-buddies" element={isAuthenticated ? (<Layout setAuth={setAuth}><div>Bite Buddies</div></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/restaurants/:id/review/:reviewid" element={<UpdateReviewPage />} />
+
+                        <Route path="/notification" element={isAuthenticated ? (<Layout setAuth={setAuth}><NotificationPage /></Layout>) : (<Navigate to="/" />)} />
                     </Routes>
                 </Router>
                 <ToastContainer />

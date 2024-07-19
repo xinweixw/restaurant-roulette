@@ -6,6 +6,7 @@ import { SearchAutofill } from './components/SearchAutofill';
 import { SearchResultsList } from './components/SearchResultsList';
 import { FilterList } from './components/FilterList';
 import { useNavigate } from 'react-router-dom';
+import NotificationBell from '../Notification/NotificationBell';
 
 const specialFilters = ['Halal', 'Vegetarian', 'Vegan'];
 const priceFilters = ['$', '$$', '$$$', '$$$$'];
@@ -106,7 +107,12 @@ const SearchPage = () => {
 
     return (
         <div className="App">
-            <div className="AppLogo">Restaurant Roulette</div>
+            <div className="AppLogo d-flex flex-row">
+                <div className="p-2">Restaurant Roulette</div>
+                <div className="p-2">
+                    <NotificationBell />
+                </div>
+            </div>
             <div className="search-bar-container">
                 <SearchBar 
                   handleSearch={handleSearch}
