@@ -4,6 +4,7 @@ import SearchUsers from './SearchUsers';
 import { toast } from 'react-toastify';
 import "./CreateNewGroup.css"
 import supabase from '../../FoodSearch/config/SupabaseClient';
+import NotificationBackend from '../../apis/NotificationBackend';
 
 const CreateNewGroup = () => {
     const navigate = useNavigate();
@@ -90,6 +91,20 @@ const CreateNewGroup = () => {
 
             if (insertMembersError) throw insertMembersError;
         
+
+            // Create notifications for each member
+            const notificationsPromises = groupMembers
+                //.filter(member => member.user_id !== currentUser.user_id)
+                .map(async member => {
+                    await NotificationBackend.post('/', {
+                        recipient_id: member.user_id,
+                        type: 'group_creation',
+                        message: `You have been added to a new group "${groupName}".`
+                    });
+                });
+
+            await Promise.all(notificationsPromises);
+
 
             toast.success("Group created successfully!");
             navigate(`/bite-buddies`);

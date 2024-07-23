@@ -2,11 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { Navigate , useNavigate } from 'react-router-dom';
 import './SideBar.css';
 import profilePic from '../assets/chef_image.png';
+import NotificationBackend from '../apis/NotificationBackend';
 
 export const SideBar = ({setAuth}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState("");
+    const [notifs, setNotifs] = useState([]);
+    const [unreadNotifs, setUnreadNotifs] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            return;
+        }
+
+        const getData = async () => {
+            try {
+                const response = await NotificationBackend.get("/", {
+                    headers: {
+                        token: token
+                    }
+                });
+                setNotifs(response.data.data);
+                if (notifs.length >= 1) {
+                    setUnreadNotifs(notifs.filter(notif => {
+                        return !notif.is_read
+                    }));
+                } 
+            } catch (err) {
+                console.error(err.message);
+            }
+        };
+        getData();
+    }, [notifs]);
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -36,6 +66,11 @@ export const SideBar = ({setAuth}) => {
         setIsOpen(false);
         navigate('/favourites');
     };
+
+    const handleNotifs = () => {
+        setIsOpen(false);
+        navigate('/notification')
+    }
 
     async function getName() {
         try {
@@ -82,9 +117,18 @@ export const SideBar = ({setAuth}) => {
                 </div>
 
                 <ul>
+                <li onClick={handleNotifs}>
+                        <a href="#">
+                            {unreadNotifs.length > 0 ? (<i className='bx bxs-bell-ring bx-tada' ></i>) :
+                                (<i className="bx bxs-bell-ring bx-tada-hover"></i>)}
+                            <span className="nav-item">Notifications</span>
+                        </a>
+                        <span className="tooltip">Notifications</span>
+                    </li>
+
                     <li onClick={handleWhatsNew}>
                         <a href="#">
-                            <i className="bx bxs-bell-ring bx-tada-hover"></i>
+                            <i className='bx bx-news bx-tada-hover' ></i>
                             <span className="nav-item">What's New?</span>
                         </a>
                         <span className="tooltip">What's New?</span>

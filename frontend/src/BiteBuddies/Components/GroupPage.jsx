@@ -7,6 +7,7 @@ import Loading from '../../assets/Loading';
 import GenerateRestaurant from './GenerateRestaurant';
 import './GroupPage.css';
 import StarRating from '../../FoodReview/StarRating';
+import NotificationBackend from '../../apis/NotificationBackend';
 
 const GroupPage = () => {
     const navigate = useNavigate();
@@ -166,6 +167,20 @@ const GroupPage = () => {
             setCurrentGroup(updateResult);
             setActiveCollaboration(true);
             setIHaveCollabed(false);
+
+            // Create notification for each member (excluding current user)
+            const notificationsPromises = groupMembers
+                //.filter(member => member.user_id !== currentUser.user_id)
+                .map(async member => {
+                    await NotificationBackend.post('/', {
+                        recipient_id: member.user_id,
+                        type: 'collab_start',
+                        message: `A new collaboration has started in group "${groupName}".`
+                    });
+                });
+
+            await Promise.all(notificationsPromises);
+
 
             toast.success("Started Collaboration successfully!");
 
