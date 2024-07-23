@@ -1,10 +1,12 @@
 import React from "react";
 
-
 const Loading = () => {
 return (
     <h1 className="loadIcon">
-        <i className="bx bx-loader-circle bx-spin" />
+        <div>
+        <i class='bx bx-baguette bx-flip-vertical bx-spin' ></i>
+        </div>
+
     </h1>
 );
 }

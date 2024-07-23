@@ -1,0 +1,24 @@
+.Container{
+    width:auto;
+    max-width: 100%;
+}
+
+.collabHistoryContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:10px;
+    margin:10px;
+    background-color: wheat;
+    width: 100%;
+}
+
+.collabUsersContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:10px;
+    margin:10px;
+    background-color: wheat;
+    width: 100%;
+}
