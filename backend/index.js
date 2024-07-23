@@ -44,7 +44,10 @@ app.use(require('./controllers/whatnew'));
 app.use(require('./routes/whatsnewRoute'));
 
 // bite buddies
-app.use('/bite-buddies', require('./routes/groupRoutes'));
+app.use(require('./routes/biteBuddiesRoute'));
+
+// notifications 
+app.use(require('./routes/notificationRoute'));
 
 app.get("/", (req, res) => {
     res.json("hello");

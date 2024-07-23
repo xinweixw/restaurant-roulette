@@ -159,7 +159,7 @@ const BiteBuddies = () => {
                         {searchResults.length > 0 ? (
                             searchResults.map(group => (
                                 <div className="groupTabContainer" onClick={() => handleSelectGroupTab(group.chat_id)} key={group.chat_id}>
-                                    <div className="groupName">
+                                    <div className="groupName" key={`${group.chat_id}-name`}>
                                         {group.chat_name}
                                     </div>
                                 </div>
@@ -168,13 +168,13 @@ const BiteBuddies = () => {
                             groupInfo.length > 0 ? (
                                 groupInfo.map(group => (
                                     <div className="groupTabContainer" onClick={() => handleSelectGroupTab(group.chat_id)} key={group.chat_id}>
-                                        <div className="groupName">
+                                        <div className="groupName" key={`${group.chat_id}-name`}>
                                             {group.chat_name}
                                         </div>
                                     </div>
                                 ))
                             ) : (
-                                <div>No groups found.</div>
+                                <div key="no-groups">No groups found.</div>
                             )
                         )}
                     </>

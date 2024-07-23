@@ -80,6 +80,7 @@ const RestaurantPage = () => {
 
   return (
     <div>
+      <button onClick={() => navigate("/food-search")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
       {selectedRestaurant && (
         <>
           <RestaurantInfo oneRestaurant={selectedRestaurant.restaurant} setIsClicked={setIsClicked} inFav={inFav} setInFav={setInFav} addFavFolder={addFavFolder} setIsAdding={setIsAdding} />
