@@ -38,7 +38,7 @@ app.use(require('./routes/randomQuizRoute'));
 app.use(require('./routes/favouriteRoute'));
 
 // get automated web scraping
-app.use('/whatnewcron', require('./controllers/whatnew'));
+app.use(require('./controllers/whatnew'));
 
 // get all new restaurants
 app.use(require('./routes/whatsnewRoute'));

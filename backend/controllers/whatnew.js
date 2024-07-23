@@ -1,55 +1,46 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const path = require('path');
+const router = require('express').Router();
 const supabase = require('../database');
-const cron = require('node-cron');
+const chrome = require('@sparticuz/chromium');
 
-async function getNewOpenings(req, res) {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('https://eatbook.sg/category/news/new-openings');
-
-    const newOpenings = await page.$$eval('#main ul li', (elements) => elements.map(e => ({
-        title: e.querySelector('article .post-header h2').innerText,
-        summary: e.querySelector('article .post-entry p').innerText,
-        url: e.querySelector('article .post-img a').href,
-    }))); 
-
-    // console.log(newOpenings);
-
-    // res.status(200).json("Success");
-
+router.get('/whatnewcron', async (req, res) => {
+    let browser;
     try {
-        const { data: oldOpenings, error: oldError } = await supabase.from('openings_websites')
-            .delete();
+        browser = await puppeteer.launch({
+            args: [...chrome.args, '--no-sandbox', '--disable-setuid-sandbox'],
+            headless: true,
+            executablePath: await chrome.executablePath()
+        });
 
-        if (oldError) throw oldError;
+        const page = await browser.newPage();
+        await page.goto('https://eatbook.sg/category/news/new-openings', { waitUntil: 'domcontentloaded' });
+
+        const newOpenings = await page.$$eval('#main ul li', (elements) => {
+            return elements.slice(0, 5).map(e => ({
+                title: e.querySelector('.post-header h2').innerText,
+                summary: e.querySelector('.post-entry p').innerText,
+                url: e.querySelector('.post-img a').href,
+            }));
+        });
 
         const { data: openings, error: openingsError } = await supabase.from('openings_websites')
-            .insert(newOpenings)
-            .select();
+            .insert(newOpenings);
 
         if (openingsError) throw openingsError;
 
-        const { data: updatedOpenings, error: updatedError } = await supabase.from('restaurants')
-            .update({ is_new: false })
-            .eq('is_new', true);
-
-        if (updatedError) throw updatedError;
-
-        // console.log("updated");
         res.status(200).json({
             status: "success"
-        })
+        });
 
     } catch (err) {
-        console.log(err);
+        console.error(err.message);
         res.status(500).json("Server Error");
+    } finally {
+        if (browser) {
+            await browser.close();
+        }
     }
+});
 
-    await browser.close();
-}
-
-// const automated = async () => {
-//     cron.schedule("* * * * *", getNewOpenings);
-// }; 
-
-module.exports = getNewOpenings;
+module.exports = router;

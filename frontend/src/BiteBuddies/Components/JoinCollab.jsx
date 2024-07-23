@@ -16,7 +16,6 @@ const JoinCollab = () => {
 
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value);
-        //setShowOptions(false); // reset showOptions when category changes
         setSelectedOption('');
     };
 
@@ -57,14 +56,14 @@ const JoinCollab = () => {
         <div className="Container">
             <h2>Collaboration has started!</h2>
             
-            <form onSubmit={handleSubmit}>
+            <form-select onSubmit={handleSubmit} type="text">
                 <div className="form-group">
                     <label htmlFor="categoryOptions">Select a category:</label>
                     <select
                         id="categoryOptions"
                         className="form-control"
                         value={selectedCategory}
-                        onChange={handleCategoryChange}
+                        onChange={(e) => {handleCategoryChange(e)}}
                         required
                     >
                         <option value="">Select a category...</option>
@@ -80,7 +79,7 @@ const JoinCollab = () => {
                                 id="collabOptions"
                                 className="form-control"
                                 value={selectedOption}
-                                onChange={handleOptionChange}
+                                onChange={(e) => {handleOptionChange(e)}}
                                 required
                             >
                                 <option value="">Select...</option>
@@ -95,7 +94,7 @@ const JoinCollab = () => {
                     
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            </form-select>
         </div>
     );
 };

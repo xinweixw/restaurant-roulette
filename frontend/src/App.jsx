@@ -20,6 +20,7 @@ import WhatsNewPage from './WhatsNew/WhatsNewPage';
 import BiteBuddies from './BiteBuddies/BiteBuddiesPage';
 import CreateNewGroup from './BiteBuddies/Components/CreateNewGroup'
 import GroupPage from './BiteBuddies/Components/GroupPage';
+import QuizForm from './RandomRestaurantGenerator/QuizForm';
 
 
 // Sidebar layout
@@ -71,7 +72,7 @@ function App() {
                         <Route path="/restaurants/:id/review/:reviewid" element={isAuthenticated ? (<Layout setAuth={setAuth}> <UpdateReviewPage setAuth={setAuth} /> </Layout>) : (<Navigate to="/" />)} />
 
                         <Route path="/random-restaurant-generator" element={isAuthenticated ? (<Layout setAuth={setAuth}><QuizPage /></Layout>) : (<Navigate to="/" />)} />
-                        <Route path="/random-restaurant-generator/quiz-questions" element={isAuthenticated ? (<Layout setAuth={setAuth}><QuizQuestions /></Layout>) : (<Navigate to = "/" />)} />
+                        <Route path="/random-restaurant-generator/quiz-questions" element={isAuthenticated ? (<Layout setAuth={setAuth}><QuizForm /></Layout>) : (<Navigate to = "/" />)} />
 
                         <Route path="/what's-new" element={isAuthenticated ? (<Layout setAuth={setAuth}><WhatsNewPage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/favourites" element={isAuthenticated ? (<Layout setAuth={setAuth}><FavouritePage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />

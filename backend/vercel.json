@@ -12,7 +12,7 @@
     "crons" : [
         {
             "path": "/whatnewcron",
-            "schedule": "0 10 10 * *"
+            "schedule": "0 8 17 * *"
         }
     ]
 }
