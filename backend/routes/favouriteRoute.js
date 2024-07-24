@@ -135,7 +135,7 @@ router.delete('/api/favourites/:id', authorisation, async (req, res) => {
     }
 });
 
-// Add a restaurant to folder
+// Add a restaurant to folder //
 
 // Delete a restaurant from a folder
 router.delete('/api/favourites/:id/restaurant/:restid', authorisation, async (req, res) => {
