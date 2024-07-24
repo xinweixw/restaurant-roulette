@@ -100,4 +100,29 @@ router.delete('/api/notification', authorisation, async (req, res) => {
     }
 });
 
+// Create a notification
+router.post('/api/notification', async (req, res) => {
+    try {
+        const { groupMembers, notifMsg, notifType } = req.body;
+        const { data: newNotifData, error: newNotifError } = await supabase.from('notifications')
+        .insert(groupMembers.map(member => ({
+            user_id: member.user_id,
+            notif_msg: notifMsg,
+            notif_type: notifType,
+            is_read: false
+        })))
+        .select();
+
+        if (newNotifError) throw newNotifError;
+        
+        res.status(201).json({
+            status: "success",
+            data: newNotifData
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json("Server Error");
+    }
+});
+
 module.exports = router;

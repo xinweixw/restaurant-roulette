@@ -93,17 +93,26 @@ const CreateNewGroup = () => {
         
 
             // Create notifications for each member
-            const notificationsPromises = groupMembers
-                //.filter(member => member.user_id !== currentUser.user_id)
-                .map(async member => {
-                    await NotificationBackend.post('/', {
-                        recipient_id: member.user_id,
-                        type: 'group_creation',
-                        message: `You have been added to a new group "${groupName}".`
-                    });
-                });
+            const otherMembers = groupMembers.filter(member => member.user_id !== currentUser.user_id);
+            const notifMsg = `You have been added to a new group ${groupName}.`;
+            const notifType = 'New Group Created';
 
-            await Promise.all(notificationsPromises);
+            const response = await NotificationBackend.post("/", {
+                groupMembers: otherMembers,
+                notifMsg,
+                notifType
+            });
+            // const notificationsPromises = groupMembers
+            //     //.filter(member => member.user_id !== currentUser.user_id)
+            //     .map(async member => {
+            //         await NotificationBackend.post('/', {
+            //             recipient_id: member.user_id,
+            //             type: 'group_creation',
+            //             message: `You have been added to a new group "${groupName}".`
+            //         });
+            //     });
+
+            // await Promise.all(notificationsPromises);
 
 
             toast.success("Group created successfully!");

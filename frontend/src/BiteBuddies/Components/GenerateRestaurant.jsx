@@ -45,7 +45,7 @@ const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResu
             const { data: selectionData, error: selectionError } = await supabase
                 .from('join_collab')
                 .select('*')
-                .eq("collab_id", collabId);
+                .eq('collab_id', collabId);
     
             if (selectionError) {
                 throw selectionError;

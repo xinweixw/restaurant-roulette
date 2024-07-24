@@ -169,17 +169,26 @@ const GroupPage = () => {
             setIHaveCollabed(false);
 
             // Create notification for each member (excluding current user)
-            const notificationsPromises = groupMembers
-                //.filter(member => member.user_id !== currentUser.user_id)
-                .map(async member => {
-                    await NotificationBackend.post('/', {
-                        recipient_id: member.user_id,
-                        type: 'collab_start',
-                        message: `A new collaboration has started in group "${groupName}".`
-                    });
-                });
+            const otherMembers = groupMembers.filter(member => member.user_id !== currentUser.user_id);
+            const notifMsg = `A new collaboration has started in group ${groupName}.`;
+            const notifType = 'New Collaboration Started';
 
-            await Promise.all(notificationsPromises);
+            const response = await NotificationBackend.post("/", {
+                groupMembers: otherMembers,
+                notifMsg,
+                notifType
+            });
+            // const notificationsPromises = groupMembers
+            //     //.filter(member => member.user_id !== currentUser.user_id)
+            //     .map(async member => {
+            //         await NotificationBackend.post('/', {
+            //             recipient_id: member.user_id,
+            //             type: 'collab_start',
+            //             message: `A new collaboration has started in group "${groupName}".`
+            //         });
+            //     });
+
+            // await Promise.all(notificationsPromises);
 
 
             toast.success("Started Collaboration successfully!");
@@ -200,8 +209,8 @@ const GroupPage = () => {
             const { data: collabData, error: collabError } = await supabase
                 .from('active_collaborations')
                 .delete()
-                .match({ collab_id: collabId })
-                .single();
+                .eq('collab_id', collabId)
+                //.single();
 
             if (collabError) {
                 console.error('Error deleting collaboration:', collabError.message);
