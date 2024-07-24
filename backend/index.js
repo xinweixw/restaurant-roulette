@@ -10,11 +10,11 @@ app.use(express.json());
 app.use(cors());
 
 // Configure CORS
-const corsOptions = {
-    origin: 'http://localhost:5173',  // Replace with your frontend URL
-    credentials: true,  // Required to allow cookies and authorization headers
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: 'http://localhost:5173',  // Replace with your frontend URL
+//     credentials: true,  // Required to allow cookies and authorization headers
+// };
+// app.use(cors(corsOptions));
 
 
 
