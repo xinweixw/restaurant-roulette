@@ -11,7 +11,7 @@ app.use(cors());
 
 // Configure CORS
 const corsOptions = {
-    origin: 'https://restaurant-roulette-frontend.vercel.app',  // Replace with your frontend URL
+    origin: 'http://localhost:5173',  // Replace with your frontend URL
     credentials: true,  // Required to allow cookies and authorization headers
 };
 app.use(cors(corsOptions));
