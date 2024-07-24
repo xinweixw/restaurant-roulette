@@ -17,6 +17,9 @@ import QuizQuestions from './RandomRestaurantGenerator/QuizQuestions';
 import FavouritePage from './Favourites/FavouritePage';
 import FolderPage from './Favourites/FolderPage';
 import WhatsNewPage from './WhatsNew/WhatsNewPage';
+import BiteBuddies from './BiteBuddies/BiteBuddiesPage';
+import CreateNewGroup from './BiteBuddies/Components/CreateNewGroup'
+import GroupPage from './BiteBuddies/Components/GroupPage';
 import QuizForm from './RandomRestaurantGenerator/QuizForm';
 import NotificationPage from './Notification/NotificationPage';
 
@@ -68,16 +71,20 @@ function App() {
                         <Route path="/food-search" element={isAuthenticated ? (<Layout setAuth={setAuth}> <SearchPage setAuth={setAuth} /> </Layout>) : (<Navigate to="/" />)} />
                         <Route path="/restaurants/:id" element={isAuthenticated ? (<Layout setAuth={setAuth}> <RestaurantPage setAuth={setAuth} /> </Layout>) : (<Navigate to="/" />)} />
                         <Route path="/restaurants/:id/review/:reviewid" element={isAuthenticated ? (<Layout setAuth={setAuth}> <UpdateReviewPage setAuth={setAuth} /> </Layout>) : (<Navigate to="/" />)} />
-                        
+
                         <Route path="/random-restaurant-generator" element={isAuthenticated ? (<Layout setAuth={setAuth}><QuizPage /></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/random-restaurant-generator/quiz-questions" element={isAuthenticated ? (<Layout setAuth={setAuth}><QuizForm /></Layout>) : (<Navigate to = "/" />)} />
 
                         <Route path="/what's-new" element={isAuthenticated ? (<Layout setAuth={setAuth}><WhatsNewPage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/favourites" element={isAuthenticated ? (<Layout setAuth={setAuth}><FavouritePage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
                         <Route path="/favourites/:id" element={isAuthenticated ? (<Layout setAuth={setAuth}><FolderPage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
-                        <Route path="/bite-buddies" element={isAuthenticated ? (<Layout setAuth={setAuth}><div>Bite Buddies</div></Layout>) : (<Navigate to="/" />)} />
-                        <Route path="/restaurants/:id/review/:reviewid" element={<UpdateReviewPage />} />
 
+                        <Route path="/bite-buddies" element={isAuthenticated ? (<Layout setAuth={setAuth}> <BiteBuddies setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
+                        <Route path="/bite-buddies/create-new-group" element={isAuthenticated ? (<Layout setAuth={setAuth}> <CreateNewGroup setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
+                        <Route path="/bite-buddies/group/:id" element={isAuthenticated ? (<Layout setAuth={setAuth}> <GroupPage setAuth={setAuth} /></Layout>) : (<Navigate to="/" />)} />
+
+                        <Route path="/restaurants/:id/review/:reviewid" element={<UpdateReviewPage />} />
+                        
                         <Route path="/notification" element={isAuthenticated ? (<Layout setAuth={setAuth}><NotificationPage /></Layout>) : (<Navigate to="/" />)} />
                     </Routes>
                 </Router>

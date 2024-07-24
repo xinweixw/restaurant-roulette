@@ -38,7 +38,21 @@ const Review = (props) => {
     }
     getData();
     getName();
-  },[id]); // Add 'id' as a dependency
+  }, [id]); // Add 'id' as a dependency
+
+  async function getName() {
+    try {
+      const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
+        method: "GET", 
+        headers: { token: localStorage.token }
+      });
+
+      const parseRes = await response.json();
+      setName(parseRes.user_name);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   const handleDelete = async (e, reviewid) => {
     e.stopPropagation(); 
@@ -50,10 +64,8 @@ const Review = (props) => {
     }
 
     try {
-      const response = await RestaurantBackend.delete(`/${id}/review/${reviewid}`, {
-        headers: {
-          token: token
-        }
+      await RestaurantBackend.delete(`/${id}/review/${reviewid}`, {
+        headers: { token: token }
       });
       
       setReviews(revs.filter(review => {
@@ -63,12 +75,10 @@ const Review = (props) => {
       setIsDeleting(false);
 
       toast("Review deleted!");
-      
-
     } catch (err) {
       console.error(err.message);
       toast.warning("You cannot delete this review!");
-    }
+    } 
   }
 
   const handleUpdate = async (e, restid, reviewid) => {
@@ -81,10 +91,8 @@ const Review = (props) => {
     }
 
     try {
-      const response = await RestaurantBackend.get(`/${id}/review/${reviewid}`, {
-        headers: {
-            token: token
-        }
+      await RestaurantBackend.get(`/${id}/review/${reviewid}`, {
+        headers: { token: token }
       }); 
 
       navigate(`/restaurants/${restid}/review/${reviewid}`);

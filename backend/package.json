@@ -13,6 +13,7 @@
   "dependencies": {
     "@sparticuz/chromium": "^123.0.1",
     "@supabase/supabase-js": "^2.43.4",
+    "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -20,6 +21,9 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.5",
     "puppeteer": "^22.12.1",
-    "puppeteer-core": "=10.2.0"
+    "puppeteer-core": "^22.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }

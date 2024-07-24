@@ -71,11 +71,12 @@ const RestaurantPage = () => {
   }, [id]);
 
   if (loading) {
-    return (<h1 className="loadIcon">
-      <i className="bx bx-loader-circle bx-spin"/>
-      </h1>);
+    return (
+      <h1 className="loadIcon">
+        <i className="bx bx-loader-circle bx-spin"/>
+      </h1>
+    );
   }
-
 
   return (
     <div>
@@ -87,7 +88,7 @@ const RestaurantPage = () => {
             <StarRating stars={selectedRestaurant.restaurant.average_star} />
             <span className="text-warning ms-1">
               {selectedRestaurant.restaurant.num_review ? `(${selectedRestaurant.restaurant.num_review})` : "(0)"}
-            </span>reviews={selectedRestaurant.reviews}
+            </span>
           </div> */}
           <div className="my-3 p-3">
             <AddReview />
