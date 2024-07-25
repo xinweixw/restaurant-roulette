@@ -82,7 +82,7 @@ const NotificationPage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("/food-search")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
+      <button onClick={() => navigate("/food-search")} className="justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
       <div>
         <h1 className="text-center">Notification Page</h1>
         <h5 className="text-center my-2 p-3">You have {unreadNotifs.length} unread {unreadNotifs.length < 1 ? "notification" : "notifications"}</h5>

@@ -3,105 +3,39 @@ import "./BiteBuddiesPage.css";
 import { useNavigate } from 'react-router-dom';
 import supabase from '../FoodSearch/config/SupabaseClient';
 import Loading from '../assets/Loading';
+import BiteBuddiesBackend from '../apis/BiteBuddiesBackend';
 
 const BiteBuddies = () => {
     const navigate = useNavigate();
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(true);
     const [groupLoading, setGroupLoading] = useState(true);
-    const [name, setName] = useState("");
-    const [currentUser, setCurrentUser] = useState(null);
-    const [groups, setGroups] = useState([]);
+    // const [name, setName] = useState("");
+    // const [currentUser, setCurrentUser] = useState(null);
+    // const [groups, setGroups] = useState([]);
     const [groupInfo, setGroupInfo] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        const fetchData = async () => {
+        const getData = async () => {
             try {
-                await getUser(); // Fetch user data
+                const response = await BiteBuddiesBackend.get("/groups", {
+                    headers: {
+                        token: token
+                    }
+                });
+                setGroupInfo(response.data.data);
             } catch (err) {
-                console.error("Error fetching data:", err.message);
+                console.error(err.message);
             } finally {
-                setLoading(false); // Set loading to false after initial fetch
+                setLoading(false);
+                setGroupLoading(false);
             }
-        };
-    
-        fetchData();
-    }, []); 
-
-    useEffect(() => {
-        if (currentUser) {
-            fetchGroups(); // Fetch groups when currentUser changes
-            fetchGroupInfo(); // Fetch group info when currentUser changes
         }
-    }, [currentUser])
-    
 
-    async function getUser() {
-        try {
-            const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
-                method: "GET", 
-                headers: { token: localStorage.token }
-            });
-        
-            const parseRes = await response.json();
-            setName(parseRes.user_name);
-
-            const { data: userData, error: userDataError } = await supabase
-                .from('users')
-                .select('*')
-                .eq('user_name', parseRes.user_name)
-                .single();
-
-            if (userDataError) {
-                console.error('Error fetching user:', userDataError.message);
-                throw userDataError;
-            }
-
-            setCurrentUser(userData);
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
-
-    const fetchGroups = async () => {
-        try {
-            const { data: chatUsersData, error: chatUsersError } = await supabase
-                .from('chat_users')
-                .select('*')
-                .eq('user_id', currentUser.user_id);
-
-            if (chatUsersError) {
-                console.error('Error fetching chat_users:', chatUsersError.message);
-                throw chatUsersError;
-            }
-            
-            setGroups(chatUsersData);
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
-
-    const fetchGroupInfo = async () => {
-        try {
-            const { data: chatData, error: chatDataError } = await supabase
-                .from('chats')
-                .select('*')
-                .in('chat_id', groups.map(group => group.chat_id));
-    
-            if (chatDataError) {
-                console.error('Error fetching chat_info:', chatDataError.message);
-                throw chatDataError;
-            }
-                
-            setGroupInfo(chatData);
-        } catch (err) {
-            console.error(err.message);
-        } finally {
-            setGroupLoading(false); // Set groupLoading to false after fetching group info
-        }
-    }
+        getData();
+    }, []);
     
     const handleCreateNewGroup = () => {
         navigate("/bite-buddies/create-new-group");
@@ -129,7 +63,7 @@ const BiteBuddies = () => {
         setSearchResults([]); // Clear search results
     }
 
-    if (loading) {
+    if (loading || groupLoading) {
         return <Loading />;
     }
 

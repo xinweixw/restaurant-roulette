@@ -51,10 +51,10 @@ const Notifications = ({ notifs, setNotifs }) => {
   }
 
   return (
-    <div className="row">
+    <div className="row justify-content-center">
       {notifs && notifs.map((notif, index) => {
         return (
-          <div className="card my-2 p-3" key={index}>
+          <div className="card my-2 p-3" key={index} style={{maxWidth: "80%"}}>
             <div className="card-body">
               <h5 className="card-title text-start">{notif.notif_type}</h5>
               <p className="card-text text-start">{notif.notif_msg}</p>
