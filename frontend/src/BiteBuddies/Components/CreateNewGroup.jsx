@@ -25,7 +25,7 @@ const CreateNewGroup = () => {
 
     async function getUser() {
         try {
-            const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
+            const response = await fetch("https://orbital-practice.vercel.app/homepage", {
                 method: "GET", 
                 headers: { token: localStorage.token }
             });

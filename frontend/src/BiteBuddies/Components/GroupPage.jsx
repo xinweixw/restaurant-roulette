@@ -49,7 +49,7 @@ const GroupPage = () => {
     const getUser = async () => {
         try {
             // Fetch current user data based on token
-            const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
+            const response = await fetch("https://orbital-practice.vercel.app/homepage", {
                 method: "GET",
                 headers: { token: localStorage.token }
             });
@@ -209,8 +209,8 @@ const GroupPage = () => {
             const { data: collabData, error: collabError } = await supabase
                 .from('active_collaborations')
                 .delete()
-                .eq('collab_id', collabId)
-                //.single();
+                .match({ collab_id: collabId })
+                .single();
 
             if (collabError) {
                 console.error('Error deleting collaboration:', collabError.message);
@@ -375,6 +375,7 @@ const GroupPage = () => {
 
     return (
         <div className="Container" style={{ height: '100vh' }}>
+            <button onClick={() => navigate("/bite-buddies")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
             <div className="GroupName">Group Name: {groupName}</div>
             <div className="GroupMembers">Group Members: {groupMembers.map(user => user.user_name).join(', ')}</div>
 
