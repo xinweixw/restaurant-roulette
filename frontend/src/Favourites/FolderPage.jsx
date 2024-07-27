@@ -4,12 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FavRestaurantList from './FavRestaurantList';
 import Popup from './Popup';
 import { toast } from 'react-toastify';
+import Loading from '../assets/Loading';
 
 const FolderPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [presentRestaurant, setPresentRestaurant] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // handle popup form for edit
   const [isClicked, setIsClicked] = useState(false);
@@ -28,6 +30,7 @@ const FolderPage = () => {
 
     const getData = async () => {
       try {
+        setLoading(true);
         const response = await FavouritesBackend.get(`/${id}`, {
           headers: {
             token: token
@@ -39,6 +42,8 @@ const FolderPage = () => {
         setPresentRestaurant(response.data.data.restaurants);
       } catch (err) {
         console.error(err.message);
+      } finally {
+        setLoading(false);
       }
     }
     getData();
@@ -98,6 +103,10 @@ const FolderPage = () => {
     }
   }
 
+  if (loading) {
+    return <Loading />
+  }
+
   return (
     <div>
       <button onClick={() => navigate("/favourites")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
@@ -111,7 +120,7 @@ const FolderPage = () => {
 
       <div className="my-3">
         {presentRestaurant && (
-          <FavRestaurantList restaurants={presentRestaurant} setPresentRestaurant={setPresentRestaurant} />
+          <FavRestaurantList folder={selectedFolder} restaurants={presentRestaurant} setPresentRestaurant={setPresentRestaurant} />
         )}
       </div>
       

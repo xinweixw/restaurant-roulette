@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FavouritesBackend from '../apis/FavouritesBackend';
 
-const FavRestaurantList = ({restaurants, setPresentRestaurant}) => {
+const FavRestaurantList = ({folder, restaurants, setPresentRestaurant}) => {
     const navigate = useNavigate();
 
     const handleDelete = async (e, rid, fid) => {
@@ -52,7 +52,7 @@ const FavRestaurantList = ({restaurants, setPresentRestaurant}) => {
                                 </div>
                                 {/* <button><i className="fa-solid fa-trash"></i></button> */}
                             </div>
-                            <button onClick={(e) => handleDelete(e, restaurant.rest_id, restaurant.folder_id)} className="btn"><i className="fa-solid fa-trash"></i></button>
+                            {folder.folder_name.toLowerCase() !== "all" ? (<button onClick={(e) => handleDelete(e, restaurant.rest_id, restaurant.folder_id)} className="btn"><i className="fa-solid fa-trash"></i></button>) : ""}
                         </div>
                     </>
 
