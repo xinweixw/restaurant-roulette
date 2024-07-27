@@ -6,34 +6,57 @@ import Loading from '../../assets/Loading';
 import { ResultRestaurant } from '../../FoodSearch/components/ResultRestaurant';
 import StarRating from '../../FoodReview/StarRating';
 
-const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResults}) => {
+const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResults }) => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
     const [restriction, setRestriction] = useState(null);
     const [selections, setSelections] = useState([]);
-    //const [restaurantList, setRestaurantList] = useState([]);
     const [restaurant, setRestaurant] = useState(null);
     const [percentageMatch, setPercentageMatch] = useState(null);
 
     useEffect(() => {
-        setLoading(true);
-        //setCollabId(70);
-        console.log('collad id: ', collabId);
-        if (collabId) {
-            //fetchAllRestaurants();
-            console.log(restaurantList);
-            getSelections();
+        const fetchData = async () => {
+            setLoading(true);
+
+            try {
+                console.log('collabId:', collabId);
+                if (collabId) {
+                    await getSelections();
+                }
+                // if (restaurant) {
+                //     updateHistory();
+                // }
+            } catch (err) {
+                console.log(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [collabId]); // Dependency array should include only collabId
+
+    useEffect(() => {
+        console.log('Selections state updated:', selections);
+        if (selections.length > 0) {
+            generateRestaurant();
         }
-        if (restaurant) {
-            updateHistory();
+    }, [selections]);
+
+    useEffect(() => {
+        console.log('Best restaurant updated: ', restaurant);
+        const getHistory = async () => {
+            try {
+                if (restaurant) {
+                   await updateHistory(); 
+                }
+            } catch (err) {
+                console.log(err);
+            }
         }
-    }, [collabId]);
-    
-    const handleReturnToGroupPage = () => {
-        setResults(false);
-        //setCollabId(null);
-    };
+        getHistory();
+    }, [restaurant]);
 
     const getSelections = async () => {
         try {
@@ -41,146 +64,145 @@ const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResu
                 console.error('Collab ID is null or undefined');
                 return;
             }
-    
+
             const { data: selectionData, error: selectionError } = await supabase
                 .from('join_collab')
                 .select('*')
                 .eq('collab_id', collabId);
-    
+
             if (selectionError) {
                 throw selectionError;
             }
-    
-            console.log(selectionData);
-            setSelections(selectionData);
-    
-            determineRestriction(selectionData);
-    
-            // after getting selections and determining restriction, generate restaurant
-            generateRestaurant();
-    
+
+            console.log('Selection Data:', selectionData);
+
+            if (selectionData && selectionData.length > 0) {
+                setSelections(selectionData);
+                determineRestriction(selectionData);
+            } else {
+                console.error('No selections found for the given collab ID');
+            }
         } catch (err) {
             console.log(err.message);
         }
     };
-    
+
+    const handleReturnToGroupPage = () => {
+        setResults(false);
+    };
 
     const determineRestriction = (selectionData) => {
-        // Determine dietary restriction based on selections
-        // assuming only one restriction is possible, the most "serious" one
-        const restriction = selectionData.find(selection => selection.option === 'Vegan')
-            ? 'Vegan'
-            : selectionData.find(selection => selection.option === 'Vegetarian')
-                ? 'Vegetarian'
-                : selectionData.find(selection => selection.option === 'Halal')
-                    ? 'Halal'
-                    : null;
+        const restriction = selectionData.find(selection => selection.restriction === 'Vegetarian')
+            ? 'Vegetarian'
+            : selectionData.find(selection => selection.restriction === 'Halal')
+                ? 'Halal'
+                : null;
 
         setRestriction(restriction);
     };
 
-    /*const fetchAllRestaurants = async () => {
-        try {
-            const { data, error } = await supabase
-                .from('restaurants')
-                .select('*');
-
-            if (error) {
-                console.error("Error fetching data: ", error);
-            } else {
-                setRestaurantList(data);
-            }
-
-        } catch (err) {
-            console.log(err.message);
-        }
-    };*/
-
     const generateRestaurant = () => {
         if (!restaurantList.length || !selections.length) {
+            console.error('Restaurant list or selections are empty');
             return;
         }
-    
-        // Convert selections array to object for O(1) access
-        const selectionMap = {};
-        selections.forEach(selection => {
-            selectionMap[selection.category] = selection.option;
-        });
 
-        // Track best match restaurant
-        let bestRestaurant = null;
-        let maxMatches = -1;
+        console.log("Generating restaurants...");
 
-        // Iterate over restaurants to find the best match
-        restaurantList.forEach(restaurant => {
-            // Check if restaurant meets initial restriction
-            if (restriction && restaurant.special_conditions !== restriction) {
-                return; // Skip this restaurant
+        const priceMap = {};
+        const locationMap = {};
+        const cuisineMap = {};
+
+        for (const selection of selections) {
+            if (selection.category === 'price') {
+                priceMap[selection.option] = (priceMap[selection.option] || 0) + 1;
+            } else if (selection.category === 'location') {
+                locationMap[selection.option] = (locationMap[selection.option] || 0) + 1;
+            } else {
+                cuisineMap[selection.option] = (cuisineMap[selection.option] || 0) + 1;
             }
+        }
 
-            // Check if restaurant does not meet category selection
-            //if (selectionMap.category === 'cuisine' && restaurant.cuisine !== selectionMap.option) {
-            //  return; // Skip this restaurant
-            //}
+        let priceMax = Math.max(...Object.values(priceMap));
+        let locationMax = Math.max(...Object.values(locationMap));
+        let cuisineMax = Math.max(...Object.values(cuisineMap));
 
-            let matches = 0;
+        let priceFilter = Object.keys(priceMap).filter(key => priceMap[key] === priceMax);
+        let locationFilter = Object.keys(locationMap).filter(key => locationMap[key] === locationMax);
+        let cuisineFilter = Object.keys(cuisineMap).filter(key => cuisineMap[key] === cuisineMax);
 
-            // Check each selection criterion against the restaurant deets
-            ['cuisine', 'price', 'location'].forEach(category => {
-                if (selectionMap[category] && restaurant[`${category}`] === selectionMap[category]) {
-                    matches++;
-                }
-            });
+        console.log(`Price Filter: ${priceFilter}, Location Filter: ${locationFilter}, Cuisine Filter: ${cuisineFilter}`);
 
-            // Check if current restaurant is better match
-            if (matches > maxMatches) {
-                maxMatches = matches;
-                bestRestaurant = restaurant;
+        let possibleRestaurants = restaurantList;
+
+        if (restriction) {
+            const filteredRestaurants = possibleRestaurants.filter(restaurant => restaurant.special_conditions === restriction);
+            if (filteredRestaurants.length) {
+                possibleRestaurants = filteredRestaurants;
             }
+        }
 
-            // exit the loop early if already found the best possible match
-            if (maxMatches === selections.length) {
-                return false; // Break forEach loop
+        if (priceFilter.length) {
+            const filteredRestaurants = possibleRestaurants.filter(restaurant => priceFilter.includes(restaurant.rest_price));
+            if (filteredRestaurants.length) {
+                possibleRestaurants = filteredRestaurants;
             }
-        });
+        }
 
-        // bestRestaurant contains the restaurant with the maximum matches
+        if (locationFilter.length) {
+            const filteredRestaurants = possibleRestaurants.filter(restaurant => locationFilter.includes(restaurant.rest_location));
+            if (filteredRestaurants.length) {
+                possibleRestaurants = filteredRestaurants;
+            }
+        }
+
+        if (cuisineFilter.length) {
+            const filteredRestaurants = possibleRestaurants.filter(restaurant => cuisineFilter.includes(restaurant.cuisine));
+            if (filteredRestaurants.length) {
+                possibleRestaurants = filteredRestaurants;
+            }
+        }
+
+        const bestRestaurant = possibleRestaurants[0];
+        const maxMatches = priceFilter.length + locationFilter.length + cuisineFilter.length;
+        const percentage = ((1 + maxMatches) / (selections.length + 1)) * 100;
+
         console.log("Best match restaurant:", bestRestaurant);
 
-    
-        // Calculate percentage match
-        const percentage = ((1 + maxMatches) / (selections.length + 1)) * 100;
-    
-        // Update state with best restaurant and percentage match
         setRestaurant(bestRestaurant);
         setPercentageMatch(percentage.toFixed(0)); // Rounded
     };
 
     const updateHistory = async () => {
+        setLoading(true);
         try {
-            const {data: history, error: historyError} = await supabase 
+            const { data: history, error: historyError } = await supabase
                 .from('collab_history')
-                .insert({chat_id : id, 
-                         collab_id : collabId,
-                         rec_rest : restaurant
+                .insert({
+                    chat_id: id,
+                    collab_id: collabId,
+                    rec_rest: restaurant
                 });
-                
+
             if (historyError) {
                 throw historyError;
             }
-            setLoading(false);
+            // setLoading(false);
 
         } catch (err) {
             console.log(err.message);
+        } finally {
+            setLoading(false);
         }
     };
-    
 
     if (loading) {
-        return (<div> 
-            <span>This will take about 5 minutes or so. Please do not refresh.</span>
-            <Loading />
-            </div>);
+        return (
+            <div>
+                <span>This will take about 5 minutes or so. Please do not refresh.</span>
+                <Loading />
+            </div>
+        );
     }
 
     return (
@@ -188,19 +210,19 @@ const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResu
             {percentageMatch && <div>{percentageMatch}% Match</div>}
             {restaurant && (
                 <div className="d-flex justify-content-between">
-                <div className="ResultRestaurantKey" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
-                    <img src={restaurant.image_url} alt={restaurant.rest_name} className="restImage" />
-                    <div className='row1'>
-                        <div className="restName">{restaurant.rest_name}</div>
-                        <div className="priceRange">{restaurant.rest_price}</div>
-                        <div className="rating"><StarRating stars={restaurant.average_star} /> {restaurant.average_star} ({restaurant.num_review})</div>
-                        <div className="cuisine">{restaurant.cuisine}</div>
-                        <div className='location'>{restaurant.rest_location}</div>
+                    <div className="ResultRestaurantKey" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
+                        <img src={restaurant.image_url} alt={restaurant.rest_name} className="restImage" />
+                        <div className='row1'>
+                            <div className="restName">{restaurant.rest_name}</div>
+                            <div className="priceRange">{restaurant.rest_price}</div>
+                            <div className="rating"><StarRating stars={restaurant.average_star} /> {restaurant.average_star} ({restaurant.num_review})</div>
+                            <div className="cuisine">{restaurant.cuisine}</div>
+                            <div className='location'>{restaurant.rest_location}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
             )}
-            <button onClick={handleReturnToGroupPage}>Return to Bite Buddies</button>
+            <button onClick={handleReturnToGroupPage} className="generate-button">Return to Group Page</button>
         </div>
     );
 };

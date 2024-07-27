@@ -209,8 +209,10 @@ const GroupPage = () => {
             const { data: collabData, error: collabError } = await supabase
                 .from('active_collaborations')
                 .delete()
-                .match({ collab_id: collabId })
-                .single();
+                .eq('collab_id', collabId);
+
+            // .match({ collab_id: collabId })
+            // .single();
 
             if (collabError) {
                 console.error('Error deleting collaboration:', collabError.message);
@@ -242,7 +244,7 @@ const GroupPage = () => {
     const fetchAllRestaurants = async () => {
         try {
             const { data, error } = await supabase
-                .from('restaurants')
+                .from('restaurants_with_ratings')
                 .select('*');
 
             if (error) {

@@ -159,7 +159,7 @@ const JoinCollab = ({ currentUser, chatId , collabId, setIHaveCollabed, fetchCol
                         <option value="NIL">NIL</option>
                         <option value="Halal">Halal</option>
                         <option value="Vegetarian">Vegetarian</option>
-                        <option value="Vegan">Vegan</option>
+                        {/* <option value="Vegan">Vegan</option> */}
                     </select>
                 </div>
 
