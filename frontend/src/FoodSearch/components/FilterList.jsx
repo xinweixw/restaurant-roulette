@@ -4,8 +4,9 @@ import "./FilterList.css";
 export const FilterList = ({ selectedFilters, onSelectFilter }) => {
     const specialFilters = ['Halal', 'Vegetarian', 'Vegan'];
     const priceFilters = ['$', '$$', '$$$', '$$$$'];
-    const cuisineFilters = ['Singaporean', 'Chinese', 'Western', 'Thai', 'Japanese', 'Korean'];
+    const cuisineFilters = ['Singaporean', 'Chinese', 'Western', 'Thai', 'Japanese', 'Korean', 'Asian'];
     const locationFilters = ['Bukit Timah', 'Yishun', 'Orchard', 'Kallang', 'Changi', 'Clementi', 'Bukit Merah', 'Toa Payoh', 'Hougang', 'Jurong'];
+    const newFilters = ['Newly Opened'];
 
     const handleFilterClick = (filter) => {
         onSelectFilter(filter);
@@ -64,6 +65,19 @@ export const FilterList = ({ selectedFilters, onSelectFilter }) => {
                 </button>
             ))}
                
+            </div>
+
+            <div className="newFilters">
+            {/*new restaurants filters*/}
+            {newFilters.map((filter, id) => (
+                <button 
+                    className={`filter-button ${selectedFilters.includes(filter) ? 'selected' : ''}`}
+                    key={id} 
+                    onClick={() => handleFilterClick(filter)}
+                >
+                    {filter}
+                </button>
+            ))}
             </div>
 
 

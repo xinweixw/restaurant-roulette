@@ -10,8 +10,9 @@ import NotificationBell from '../Notification/NotificationBell';
 
 const specialFilters = ['Halal', 'Vegetarian', 'Vegan'];
 const priceFilters = ['$', '$$', '$$$', '$$$$'];
-const cuisineFilters = ['Singaporean', 'Chinese', 'Western', 'Thai', 'Japanese', 'Korean'];
+const cuisineFilters = ['Singaporean', 'Chinese', 'Western', 'Thai', 'Japanese', 'Korean', 'Asian'];
 const locationFilters = ['Bukit Timah', 'Yishun', 'Orchard', 'Kallang', 'Changi', 'Clementi', 'Bukit Merah', 'Toa Payoh', 'Hougang', 'Jurong'];
+const newFilters = ['Newly Opened'];
 
 const SearchPage = () => {
     const [results, setResults] = useState([]);
@@ -45,6 +46,9 @@ const SearchPage = () => {
             const cuisineConditions = selectedFilters.filter(filter => cuisineFilters.includes(filter));
             const locationConditions = selectedFilters.filter(filter => locationFilters.includes(filter));
 
+            const newConditions = selectedFilters.filter(filter => newFilters.includes(filter));
+            const newRestaurantCondition = newConditions.map((cond) => true);
+
             if (specialConditions.length > 0) {
                 query = query.in('special_conditions', specialConditions);
             }
@@ -56,6 +60,9 @@ const SearchPage = () => {
             }
             if (locationConditions.length > 0) {
                 query = query.in('rest_location', locationConditions);
+            }
+            if (newConditions.length > 0) {
+                query = query.in('is_new', newRestaurantCondition);
             }
         }
 

@@ -39,6 +39,9 @@ const AddReview = () => {
             }); 
             // newly added 
             addReviews(response.data.data.review);
+            setReviewField("");
+            setStar("Rating");
+            toast.success("Review Added!");
             // navigate('/homepage');
         } catch (err) {
             console.error(err.message);
