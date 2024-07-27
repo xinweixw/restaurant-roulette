@@ -7,6 +7,7 @@ const NotificationPage = () => {
   const navigate = useNavigate();
   const [notifs, setNotifs] = useState([]);
   const [unreadNotifs, setUnreadNotifs] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -45,6 +46,7 @@ const NotificationPage = () => {
     }
 
     try {
+      setLoading(true);
       const response = await NotificationBackend.put("/", {
       }, {
         headers: {
@@ -56,6 +58,8 @@ const NotificationPage = () => {
       setUnreadNotifs([]);
     } catch (err) {
       console.error(err.message); 
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,6 +72,7 @@ const NotificationPage = () => {
     }
 
     try {
+      setLoading(true);
       const response = await NotificationBackend.delete("/", {
         headers: {
           token: token
@@ -77,8 +82,16 @@ const NotificationPage = () => {
       setUnreadNotifs([]);
     } catch (err) {
       console.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (<h1 className="loadIcon">
+      <i className="bx bx-loader-circle bx-spin"/>
+      </h1>);
+  }
 
   return (
     <div>
