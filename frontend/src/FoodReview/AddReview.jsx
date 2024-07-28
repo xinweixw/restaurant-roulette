@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import RestaurantBackend from '../apis/RestaurantBackend';
@@ -10,7 +10,25 @@ const AddReview = () => {
     let navigate = useNavigate();
     const [reviewField, setReviewField] = useState("");
     const [star, setStar] = useState("Rating");
+    const [name, setName] = useState("");
     const { addReviews } = useContext(RestaurantsContext);
+
+    useEffect(() => {
+        const getName = async () => {
+            try {
+                const response = await fetch("https://restaurant-roulette-backend.vercel.app/homepage", {
+                    method: "GET",
+                    headers: { token: localStorage.token }
+                });
+
+                const parseRes = await response.json();
+                setName(parseRes.user_name);
+            } catch (err) {
+                console.error(err.message);
+            }
+        }
+        getName();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,7 +49,8 @@ const AddReview = () => {
             // }); 
             const response = await RestaurantBackend.post(`/${id}/review`, {
                 star, 
-                review: reviewField
+                review: reviewField,
+                user_name: name
             }, {
                 headers: {
                     token: token

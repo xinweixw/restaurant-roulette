@@ -104,8 +104,8 @@ const Review = (props) => {
 
   return (
     <>
-      {revs.length >= 1 ? (<h2 className="mx-2 px-2 text-start justify-content-center">Reviews: </h2>) : ""}
-      <div className="row justify-content-center">
+      {revs.length >= 1 ? (<h2 className="d-flex justify-content-center">Reviews: </h2>) : ""}
+      <div className="row d-flex justify-content-center">
         {/* row-cols-3 mb-2 */}
         {revs.map((review) => {
           return (

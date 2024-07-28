@@ -32,7 +32,7 @@ router.get('/api/restaurants/:id', async (req, res) => {
         
         if (restaurantError) throw restaurantError;
 
-        const { data: reviews, error: reviewsError } = await supabase.from('food_reviews_with_names').select('*').eq('rest_id', req.params.id);
+        const { data: reviews, error: reviewsError } = await supabase.from('food_reviews').select('*').eq('rest_id', req.params.id); // remove with_names
 
         if (reviewsError) throw reviewsError;
 
@@ -53,7 +53,7 @@ router.get('/api/restaurants/:id', async (req, res) => {
 router.post('/api/restaurants/:id/review', authorisation, async (req, res) => {
     try {
         const { data: newReview, error } = await supabase.from('food_reviews')
-        .insert({ user_id: req.user, rest_id: req.params.id, star: req.body.star, review: req.body.review})
+        .insert({ user_id: req.user, rest_id: req.params.id, star: req.body.star, review: req.body.review, user_name: req.body.user_name})
         .select(); 
         
         if (error) throw error;
@@ -143,7 +143,7 @@ router.put('/api/restaurants/:id/review/:reviewid', authorisation, async (req, r
 router.get('/api/restaurants/:id/review/:reviewid', authorisation, async (req, res) => {
     try {
         // 1. Find the user who posted the review
-        const { data: review_user } = await supabase.from('food_reviews_with_names')
+        const { data: review_user } = await supabase.from('food_reviews') // remove with_names
         .select('*')
         .eq('review_id', req.params.reviewid);
 
@@ -155,7 +155,7 @@ router.get('/api/restaurants/:id/review/:reviewid', authorisation, async (req, r
         }; 
 
         // 3. Get the review
-        const { data: theReview, error: reviewError } = await supabase.from('food_reviews_with_names')
+        const { data: theReview, error: reviewError } = await supabase.from('food_reviews') // remove with_names
         .select('*')
         .eq('review_id', req.params.reviewid);
 
