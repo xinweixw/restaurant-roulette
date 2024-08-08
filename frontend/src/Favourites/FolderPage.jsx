@@ -21,6 +21,9 @@ const FolderPage = () => {
   // handle popup button for delete
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // handle edit names
+  const [folderNames, setFolderNames] = useState([]);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -37,9 +40,17 @@ const FolderPage = () => {
           }
         });
 
+        const result = await FavouritesBackend.get("/", {
+          headers: {
+            token: token
+          }
+        });
+
         // console.log(response.data.data);
         setSelectedFolder(response.data.data.folder);
         setPresentRestaurant(response.data.data.restaurants);
+        const everyFolder = result.data.data.folders;
+        setFolderNames(everyFolder.map((folder) => folder.folder_name));
       } catch (err) {
         console.error(err.message);
       } finally {
@@ -60,6 +71,9 @@ const FolderPage = () => {
 
     if (fName.toLowerCase() === "all") {
       setErrMsg("Please enter a different name. 'All' is not allowed");
+      return;
+    } else if (folderNames.includes(fName)) {
+      setErrMsg("You already have a folder with the same name. Please give this folder a different name.");
       return;
     } else {
       setErrMsg("");
