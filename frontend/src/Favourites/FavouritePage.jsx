@@ -3,17 +3,22 @@ import FavouritesBackend from '../apis/FavouritesBackend';
 import Folders from './Folders';
 import Popup from './Popup';
 import { toast } from 'react-toastify';
+import Loading from '../assets/Loading';
 
 const FavouritePage = () => {
     const [allFolders, setAllFolders] = useState([]);
     const addFolders = (newFolder) => {
         setAllFolders([...allFolders, newFolder]);
     };
+    const [folderNames, setFolderNames] = useState([]);
 
     // added from FavouriteHeader
     const [isClicked, setIsClicked] = useState(false);
     const [fName, setFName] = useState("");
     const [errMsg, setErrMsg] = useState("");
+
+    // loading
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,12 +26,15 @@ const FavouritePage = () => {
 
         if (!token) {
             // alert("You must be logged in to add a review!");
-            toast.error("You must be logged in to leave a review!");
+            toast.error("You must be logged in to create a folder!");
             return;
         }
 
         if (fName.toLowerCase() === 'all') {
             setErrMsg("Please enter a different name. 'All' is not allowed");
+            return;
+        } else if (folderNames.includes(fName)) {
+            setErrMsg("You already have a folder with the same name. Please give this folder a different name.");
             return;
         } else {
             setErrMsg("");
@@ -39,6 +47,8 @@ const FavouritePage = () => {
                     }
                 }); 
                 addFolders(response.data.data.folder);
+                // added to remove previous input
+                setFName("");
             } catch (err) {
                 console.log(err);
             }
@@ -55,18 +65,29 @@ const FavouritePage = () => {
 
         const getData = async () => {
             try {
+                setLoading(true);
                 const response = await FavouritesBackend.get("/", {
                     headers: {
                         token: token
                     }
                 });
+                const everyFolder = response.data.data.folders;
                 setAllFolders(response.data.data.folders);
+                setFolderNames(everyFolder.map((folder) => folder.folder_name));
+                console.log("The folder names are ", folderNames);
             } catch (err) {
                 console.error(err.message);
+            } finally {
+                setLoading(false);
             }
         };
         getData();
+        console.log("The folder names are ", folderNames);
     }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div>
