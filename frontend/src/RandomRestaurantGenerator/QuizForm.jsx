@@ -136,7 +136,7 @@ const QuizForm = () => {
                 </form>
             )}
             <Popup isClicked={isClicked} setIsClicked={setIsClicked}>
-                {recommendation && (
+                {recommendation ? (
                     <div className="border">
                         <h2>Recommended Restaurant: </h2><br />
                         <div onClick={e => navigate(`/restaurants/${recommendation.rest_id}`)}>
@@ -147,6 +147,14 @@ const QuizForm = () => {
                             <br />
                         </div>
                         <div>
+                            <button className="btn btn-primary" onClick={e => navigate("/random-restaurant-generator")} >Take the Quiz Again</button>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="border">
+                        <h2 className="text-start">Sorry it looks like there are no restaurants that match your preferences! Please take the quiz again. <i className="fa-regular fa-face-grin-beam-sweat"></i></h2>
+                        <div className="my-2 p-2">
+                            <button className="btn btn-info mx-2" onClick={e => setIsClicked(false)}>Edit Preferences</button>
                             <button className="btn btn-primary" onClick={e => navigate("/random-restaurant-generator")} >Take the Quiz Again</button>
                         </div>
                     </div>
