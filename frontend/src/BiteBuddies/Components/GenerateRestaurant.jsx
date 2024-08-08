@@ -123,9 +123,9 @@ const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResu
             }
         }
 
-        let priceMax = Math.max(...Object.values(priceMap));
-        let locationMax = Math.max(...Object.values(locationMap));
-        let cuisineMax = Math.max(...Object.values(cuisineMap));
+        let priceMax = Math.max(...Object.values(priceMap), 0);
+        let locationMax = Math.max(...Object.values(locationMap), 0);
+        let cuisineMax = Math.max(...Object.values(cuisineMap), 0);
 
         let priceFilter = Object.keys(priceMap).filter(key => priceMap[key] === priceMax);
         let locationFilter = Object.keys(locationMap).filter(key => locationMap[key] === locationMax);
@@ -163,14 +163,18 @@ const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResu
             }
         }
 
-        const bestRestaurant = possibleRestaurants[0];
-        const maxMatches = priceFilter.length + locationFilter.length + cuisineFilter.length;
-        const percentage = ((1 + maxMatches) / (selections.length + 1)) * 100;
+        // const bestRestaurant = possibleRestaurants[0];
+        const bestRestaurant = possibleRestaurants[Math.floor(Math.random() * possibleRestaurants.length)];
+        const maxMatches = priceMax + locationMax + cuisineMax;
+        console.log("Max Matches: ", maxMatches);
+        const percentage = ((maxMatches) / (selections.length)) * 100;
+        console.log("Percentage match is", percentage)
 
         console.log("Best match restaurant:", bestRestaurant);
 
         setRestaurant(bestRestaurant);
-        setPercentageMatch(percentage.toFixed(0)); // Rounded
+        setPercentageMatch(Math.round(percentage));
+        // setPercentageMatch(percentage.toFixed(0)); // Rounded
     };
 
     const updateHistory = async () => {
