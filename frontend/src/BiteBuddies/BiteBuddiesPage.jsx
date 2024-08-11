@@ -80,7 +80,8 @@ const BiteBuddies = () => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                 />
-                <button onClick={handleSearch}>Search</button>
+                <button onClick={handleSearch}><i className="fa-solid fa-magnifying-glass"></i></button>
+                <button onClick={handleCreateNewGroup}>Create New Group</button>
             </div>
 
             <button onClick={clearInput}>Show All Groups</button>
@@ -115,7 +116,7 @@ const BiteBuddies = () => {
                 )}
             </div>
 
-            <button onClick={handleCreateNewGroup}>Create New Group</button>
+            {/* <button onClick={handleCreateNewGroup}>Create New Group</button> */}
 
         </div>
     );

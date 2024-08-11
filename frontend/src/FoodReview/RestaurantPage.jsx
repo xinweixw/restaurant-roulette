@@ -18,6 +18,7 @@ const RestaurantPage = () => {
   const [loading, setLoading] = useState(true);
   const [favFolder, setFavFolder] = useState([]); // folders without the restaurant
   const [inFav, setInFav] = useState([]); // folders with the restaurant
+  const [folderNames, setFolderNames] = useState([]);
   const navigate = useNavigate();
 
   const addInFav = (addToFav) => {
@@ -59,6 +60,9 @@ const RestaurantPage = () => {
 
         setFavFolder(result.data.data.notFav);
         setInFav(result.data.data.fav);
+        const notFavNames = result.data.data.notFav.map((folder) => folder.folder_name);
+        const inFavNames = result.data.data.fav.map((folder) => folder.folder_name);
+        setFolderNames([...notFavNames, ...inFavNames]);
 
       } catch (err) {
         console.error(err.message);
@@ -100,7 +104,7 @@ const RestaurantPage = () => {
           </Popup>
 
           <Popup isClicked={adding} setIsClicked={setIsAdding}>
-            <AddNewFolder setIsClicked={setIsAdding} createNewFolder={createNewFolder} />
+            <AddNewFolder setIsClicked={setIsAdding} createNewFolder={createNewFolder} folderNames={folderNames} />
           </Popup>
         </>
       )}

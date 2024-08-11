@@ -126,6 +126,8 @@ const CreateNewGroup = () => {
 
     return (
         <div className="Container">
+            <button onClick={() => navigate("/bite-buddies")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
+            
             <div className="TopicName">Bite Buddies</div>
 
             <input

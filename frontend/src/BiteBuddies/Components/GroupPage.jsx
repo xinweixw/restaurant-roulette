@@ -8,6 +8,7 @@ import GenerateRestaurant from './GenerateRestaurant';
 import './GroupPage.css';
 import StarRating from '../../FoodReview/StarRating';
 import NotificationBackend from '../../apis/NotificationBackend';
+import Popup from '../../Favourites/Popup';
 
 const GroupPage = () => {
     const navigate = useNavigate();
@@ -25,6 +26,9 @@ const GroupPage = () => {
     const [results, setResults] = useState(false);
     const [history, setHistory] = useState([]);
     const [restaurantList, setRestaurantList] = useState([]);
+
+    // handle popup
+    const [isClicked, setIsClicked] = useState(false);
 
     useEffect(() => {
         fetchAllRestaurants();
@@ -377,9 +381,13 @@ const GroupPage = () => {
 
     return (
         <div className="Container" style={{ height: '100vh' }}>
-            <button onClick={() => navigate("/bite-buddies")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
-            <div className="GroupName">Group Name: {groupName}</div>
-            <div className="GroupMembers">Group Members: {groupMembers.map(user => user.user_name).join(', ')}</div>
+            <div className="GroupHeader">
+                <div className="GroupSubHeader">
+                    <button onClick={() => navigate("/bite-buddies")} className="btn d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
+                    <div className="GroupName">{groupName}</div>
+                </div>
+                <div className="GroupMembers">Group Members: {groupMembers.map(user => user.user_name).join(', ')}</div>
+            </div>
 
             {activeCollaboration ? (
                 <div>
@@ -431,7 +439,17 @@ const GroupPage = () => {
                 )}
             </div>
 
-            {activeCollaboration ? null : (<button onClick={handleDeleteGroup}>Delete Group</button>)}
+            {activeCollaboration ? null : (<button onClick={(e) => setIsClicked(true)}>Delete Group</button>)}
+            <Popup isClicked={isClicked} setIsClicked={setIsClicked} >
+                <div className="confirmDelete">
+                    <span>Are you sure you want to delete this group?</span>
+                    <br/>
+                    <div className="buttonGroup">
+                        <button className="btn btn-primary p-2 m-2" onClick={handleDeleteGroup}>Yes</button>
+                        <button className="btn btn-primary p-2 m-2" onClick={(e) => setIsClicked(false)}>No</button>
+                    </div>
+                </div>
+            </Popup>
         </div>
     );
 };

@@ -52,68 +52,75 @@ const AddToFavourite = ({ favFolders, setFavFolder, addInFav, setIsClicked }) =>
                     return checkboxes.includes(favFolder.folder_id);
                 });
                 addInFav(favourited);
-    
+
                 toast("Restaurant saved!");
             } catch (err) {
-               console.error(err.message); 
+                console.error(err.message);
             }
-    
+
             setIsClicked(false);
         }
 
-        
+
     }
 
-  return (
-    <div>
-        <form action="">
-            {favFolders && favFolders.map((folder) => {
-                return (
-                    <div key={folder.folder_id}>
-                        {folder.folder_name === "All" ? (
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    className="form-check-input"
-                                    value={folder.folder_id}
-                                    name="favourite"
-                                    id={folder.folder_id}
-                                    onChange={() => handleChange(folder.folder_id, folder.folder_name)}
-                                    required
-                                />
-                                <label className="form-check-label" htmlFor={folder.folder_id}>
-                                    {folder.folder_name}
-                                </label>
-                            </div>
-                        ) : (
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    className="form-check-input"
-                                    value={folder.folder_id}
-                                    name="favourite"
-                                    id={folder.folder_id}
-                                    onChange={() => handleChange(folder.folder_id, folder.folder_name)}
-                                />
-                                <label className="form-check-label" htmlFor={folder.folder_id}>
-                                    {folder.folder_name}
-                                </label>
-                            </div>
-                        )}
-                    </div>
-                )
-            })}
+    return (
+        <div>
+            <form action="">
+                <div className="d-flex flex-column text-center mb-3 pb-3" style={{ borderBottom: "2px solid black", maxWidth: "100%" }}>
+                    <span>Select the folders to add the restaurant to</span>
+                    <span>Please select the 'All' folder if it's an option</span>
+                </div>
 
-            {favFolders ? (
-                <button onClick={handleSubmit} type="submit" className="btn btn-primary my-1 p-2">Save</button>
-            ) : (
-                <p>This restaurant is already saved in every folder</p>
-            )}
+                <div className="d-flex flex-column justify-content-center">
+                    {favFolders && favFolders.map((folder) => {
+                        return (
+                            <div key={folder.folder_id}>
+                                {folder.folder_name === "All" ? (
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            value={folder.folder_id}
+                                            name="favourite"
+                                            id={folder.folder_id}
+                                            onChange={() => handleChange(folder.folder_id, folder.folder_name)}
+                                            required
+                                        />
+                                        <label className="form-check-label" htmlFor={folder.folder_id}>
+                                            {folder.folder_name}
+                                        </label>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            value={folder.folder_id}
+                                            name="favourite"
+                                            id={folder.folder_id}
+                                            onChange={() => handleChange(folder.folder_id, folder.folder_name)}
+                                        />
+                                        <label className="form-check-label" htmlFor={folder.folder_id}>
+                                            {folder.folder_name}
+                                        </label>
+                                    </div>
+                                )}
+                            </div>
+                        )
+                    })}
+                </div>
 
-            {errMsg && <p>{errMsg}</p>}
-        </form>
-    </div>
-  )
+                {favFolders ? (
+                    <button onClick={handleSubmit} type="submit" className="btn btn-primary my-1 p-2">Save</button>
+                ) : (
+                    <p>This restaurant is already saved in every folder</p>
+                )}
+
+                {errMsg && <p>{errMsg}</p>}
+            </form>
+        </div>
+    )
 }
 
 export default AddToFavourite;

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import NewRestaurantList from './NewRestaurantList';
 import WhatsNewBackend from '../apis/WhatsNewBackend';
+import Loading from '../assets/Loading';
 
 const WhatsNewPage = () => {
     const [newRests, setNewRests] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -14,6 +16,7 @@ const WhatsNewPage = () => {
 
         const getData = async () => {
             try {
+                setLoading(true);
                 const response = await WhatsNewBackend.get("/", {
                     headers: {
                         token: token
@@ -23,10 +26,16 @@ const WhatsNewPage = () => {
                 //console.log(newRests);
             } catch (err) {
                 console.error(err.message);
+            } finally {
+                setLoading(false);
             }
         };
         getData();
     }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
 
   return (
     <div>

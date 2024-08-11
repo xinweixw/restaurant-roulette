@@ -22,3 +22,33 @@
     background-color: wheat;
     width: 100%;
 }
+
+.GroupHeader {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: blanchedalmond;
+    gap: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.GroupSubHeader {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.GroupSubHeader button:hover {
+    border: 2px solid brown;
+    cursor: pointer;
+}
+
+.GroupName {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.confirmDelete {
+    display: flex;
+    flex-direction: column;
+}
