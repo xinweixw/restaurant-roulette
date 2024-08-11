@@ -91,8 +91,10 @@ const LoginSignupConnected = ({ setAuth }) => {
                 localStorage.setItem("token", parseRes.token);
                 setAction("Login"); 
                 setSuccessMessage("Thank you for signing up! Please log in");
+            } else if (parseRes === "User already exists") {
+                setWarningMessage("Email is already in use. Please use a different email.");
             } else {
-                setWarningMessage("Sign up failed. Please try again.");
+                setWarningMessage("Username is already in use. Please use a different username.");
             }
         } catch (err) {
             console.error(err.message);
