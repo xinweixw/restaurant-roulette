@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .popup-inner {
@@ -17,10 +18,13 @@
     max-width: 640px;
     background-color: #FFE7B4;
     border-style: solid;
+    z-index: 1000;
 }
 
 .popup-inner .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
+    z-index: 1000;
+    background-color: blanchedalmond;
 }

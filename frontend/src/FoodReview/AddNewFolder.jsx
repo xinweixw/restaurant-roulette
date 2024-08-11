@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FavouritesBackend from '../apis/FavouritesBackend';
 import { toast } from 'react-toastify';
 
-const AddNewFolder = ({setIsClicked, createNewFolder}) => {
+const AddNewFolder = ({setIsClicked, createNewFolder, folderNames}) => {
     const [fName, setFName] = useState("");
     const [errMsg, setErrMsg] = useState("");
 
@@ -18,6 +18,9 @@ const AddNewFolder = ({setIsClicked, createNewFolder}) => {
 
         if (fName.toLowerCase() === 'all') {
             setErrMsg("Please enter a different name. 'All' is not allowed");
+            return;
+        } else if (folderNames.includes(fName)) {
+            setErrMsg("You already have a folder with the same name. Please give this folder a different name.");
             return;
         } else {
             setErrMsg("");
@@ -40,6 +43,7 @@ const AddNewFolder = ({setIsClicked, createNewFolder}) => {
   return (
       <div>
           <form action="">
+              <p style={{color: 'brown'}} className="text-center">Create a new folder to add this restaurant into</p>
               <label className="me-2" htmlFor="newFolderName">Folder Name: </label>
               <input
                   type="text"
