@@ -1,0 +1,83 @@
+.bell {
+    font-size: 15px;
+    justify-self: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid orangered;
+    color: #582c1b;
+}
+
+.bell:hover {
+    background-color: #fcfaf1;
+    border: 1px solid orangered;
+}
+
+.container {
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%; /* Adjust percentage as needed */
+    margin: auto; /* Center the container horizontally */
+}
+
+.back-button {
+    position: fixed;
+    left: 90px;
+    top: 20px;
+    background-color: transparent;
+}
+
+.back-button:hover {
+    background-color: transparent;
+    color: orange;
+    transform: scale(1.5);
+}
+
+
+h1 {
+    color: orange;
+    margin-bottom: 20px;
+}
+
+h5 {
+    margin-bottom: 20px;
+}
+
+.button-container {
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.overall-btn {
+    width: 100%;
+}
+
+.overall-btn:disabled {
+    background-color: #f0e6cc;
+    color:gray;
+}
+
+.notif-btn {
+    width: 100%;
+    margin: 3px;
+}
+
+.card {
+    background-color: #fcfaf1;
+    border-radius: 20px;
+    border:none;
+    box-shadow: 0 2px 4px #582c1b28;
+}
+
+.card-body, .card-footer {
+    color:#582c1b;
+    background-color: transparent;
+}

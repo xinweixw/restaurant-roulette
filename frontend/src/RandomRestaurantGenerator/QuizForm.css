@@ -1,0 +1,64 @@
+
+.btn {
+    background-color: #ffda8b;
+    width: 10px;
+    color:white;
+}
+
+i {
+    font-size: 15px;
+    padding: none;
+    margin: none;
+}
+
+.btn:hover {
+    background-color: orange;
+    color: white;
+    transform: none;
+}
+
+.btn:disabled {
+    background-color: transparent;
+    border:none;
+    color:#444;
+}
+
+
+/* Popup styling */
+.popup-content {
+    width: 100%;
+    text-align: center;
+}
+
+/* Popup image styling */
+.popup-content img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 10px;
+}
+
+/* Button group styling */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.btn-popup {
+    margin-left: 1rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+    background-color: #ffda8b;
+    color: #582c1b;
+}
+
+
+h3 {
+    font-size: 22px;
+    color:#582c1b;
+    margin-top: 5px;;
+}

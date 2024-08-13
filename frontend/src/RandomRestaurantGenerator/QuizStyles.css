@@ -1,0 +1,85 @@
+/* General container styling */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+    background-color: #ffda8b;
+    color: #582c1b;
+}
+
+
+.icon-container {
+    margin-top: 10px;
+}
+
+i {
+    font-size: 25px;
+    padding: 5px
+}
+
+span {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Styling for the question header */
+h3.text-center {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    font-weight: 600;
+}
+
+.question {
+    font-size: bold;
+}
+
+.option-input {
+    display: none;
+}
+
+.option-container {
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover and select effects */
+    background: #ffe7b3; /* Background color */
+    box-shadow: 0 2px 4px #582c1b28; /* Subtle shadow */
+}
+
+/* Hover effect */
+.option-container:hover {
+    background-color: #ffefd2; /* Slightly lighter beige background on hover */
+    box-shadow: 0 4px 8px #582c1b28; /* Enhanced shadow on hover */
+    transform: scale(1.02); /* Slightly increase size */
+}
+
+/* Styling for selected state */
+.option-container.selected {
+    color: #fff;
+    background-color: orange; /* Background color for selected state */
+    box-shadow: 0 4px 8px #582c1b28; /* Enhanced shadow for selected state */
+}
+
+/* Increase size and transition on hover */
+.option-container.selected:hover {
+    transform: scale(1.02); /* Slightly increase size */
+}
+
+.option-container .option-label {
+    width: 100%;
+    align-items: center;
+    font-family: 'Trebuchet MS', sans-serif; /* Font family */
+    font-size: 1rem; /* Font size */
+    color: #333; /* Text color */
+}
+
+
+.option-label.selected {
+    color: #fff;
+    font-weight: 550;
+}

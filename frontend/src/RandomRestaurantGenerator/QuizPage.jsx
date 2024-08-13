@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./QuizStyles.css";
 
 const QuizPage = () => {
     const navigate = useNavigate(); // Corrected declaration
@@ -7,10 +8,17 @@ const QuizPage = () => {
     return (
         <>
             <div className="container text-center my-3">
-                <i className="fa-solid fa-mug-saucer"></i>
+
+                <div className="icon-container">
+                    <i className='bx bxs-pear'></i>
+                    <i className='bx bx-cheese'></i>
+                    <i className="fa-solid fa-burger"></i>
+                    <i className='bx bxs-coffee-bean' ></i>
+                    <i className='bx bxs-bowl-rice'></i>
+                </div>
+
                 <h1>Random Restaurant Generator</h1>
-                <i className="fa-solid fa-burger"></i>
-                <span className="my-3">take a short quiz & get a restaurant</span>
+                <span className="my-3">take a short quiz & get your next restaurant!</span>
             </div>
             {/* Corrected onClick handler */}
             <button onClick={() => navigate("/random-restaurant-generator/quiz-questions")}>Start Quiz</button>

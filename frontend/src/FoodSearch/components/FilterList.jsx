@@ -2,7 +2,7 @@ import React from 'react';
 import "./FilterList.css";
 
 export const FilterList = ({ selectedFilters, onSelectFilter }) => {
-    const specialFilters = ['Halal', 'Vegetarian', 'Vegan'];
+    const specialFilters = ['Halal', 'Vegetarian'];
     const priceFilters = ['$', '$$', '$$$', '$$$$'];
     const cuisineFilters = ['Singaporean', 'Chinese', 'Western', 'Thai', 'Japanese', 'Korean', 'Asian'];
     const locationFilters = ['Bukit Timah', 'Yishun', 'Orchard', 'Kallang', 'Changi', 'Clementi', 'Bukit Merah', 'Toa Payoh', 'Hougang', 'Jurong'];

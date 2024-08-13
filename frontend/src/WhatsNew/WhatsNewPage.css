@@ -1,5 +1,17 @@
+.whatsnew-container {
+    width: 90%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding-right: 15px;
+    margin: auto;
+    max-height: 650px;
+}
+
 .ResultRestaurantKey {
-    width: 100%;
+    width: 700px;
+    height: 100px;
     padding: 10px 20px;
     background-color:#ffe7b3;
     margin: 8px;
