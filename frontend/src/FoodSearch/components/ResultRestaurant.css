@@ -1,6 +1,5 @@
 .ResultRestaurantKey {
     width: 100%;
-    padding: 10px 20px;
     background-color:#ffe7b3;
     margin: 8px;
     border-radius: 8px;
@@ -9,7 +8,7 @@
     align-items: center;
     min-height: 10rem;
     position: relative;
-    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .ResultRestaurantKey:hover {
@@ -19,6 +18,7 @@
 .restImage {
     position:absolute;
     height: 85%;
+    width: 25%;
     left: 1%;
     object-fit: cover;
     border-radius: 15px;
@@ -26,13 +26,16 @@
 }
 
 .row1 {
+    background-color: transparent;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: flex-start; /* Align items to the left */
-    width: 70%; /* Adjust width as needed to fit within the container */
+    width: 65%; /* Adjust width as needed to fit within the container */
     position: relative;
     overflow: hidden; /* Hide overflow content */
-    left: 270px;
+    left: 30%;
+    margin-right: 5px;
+    justify-content: center;
     font-weight:500;
 }
 

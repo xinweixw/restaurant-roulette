@@ -1,0 +1,46 @@
+.join-collab-container {
+    display: flex;
+    position: relative;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    max-height: 1500px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+.collab-form {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color:#582c1b;
+    font-weight: 400;
+}
+
+.form-group {
+    width: 100%;
+    margin: 10px;
+}
+
+.form-control {
+    color: #582c1b;
+    background-color: #fcfaf1;
+    margin: 5px;
+}
+
+.form-control:focus {
+    background-color: #fcfaf1;
+    color:#582c1b;
+}
+
+option {
+    color:#582c1b;
+    background-color: #fcfaf1;
+}
+
+option:hover {
+    background-color: #ffda8b;
+}

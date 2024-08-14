@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import RestaurantBackend from '../apis/RestaurantBackend';
 import { RestaurantsContext } from '../context/RestaurantsContext';
+import "./RestaurantPage.css";
 
 const AddReview = () => {
     const { id } = useParams();
@@ -68,10 +69,10 @@ const AddReview = () => {
     };
 
     return (
-        <div className="my-2">
+        <div>
             <h2>Leave a Review</h2>
             <form onSubmit={handleSubmit}>
-                <div className="container">
+                <div className="review-container">
                     <div className="mb-2">
                         <label htmlFor="star">Rating</label>
                         <select className="form-select" value={star} onChange={e => setStar(e.target.value)} id="star" type="text" required>
@@ -88,7 +89,7 @@ const AddReview = () => {
                         <textarea value={reviewField} onChange={e => setReviewField(e.target.value)}
                             id="review" className="form-control" required></textarea>
                     </div>
-                    <button type="submit" className="btn btn-warning">Add Review</button>
+                    <button type="submit" className='add-review-btn'>Add Review</button>
                 </div>
             </form>
         </div>

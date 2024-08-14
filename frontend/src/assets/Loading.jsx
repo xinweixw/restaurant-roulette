@@ -4,7 +4,7 @@ const Loading = () => {
 return (
     <h1 className="loadIcon">
         <div>
-        <i className='bx bx-baguette bx-flip-vertical bx-spin' ></i>
+        <i className='bx bx-baguette bx-flip-vertical bx-spin' style={{fontSize:"50px"}}></i>
         </div>
 
     </h1>

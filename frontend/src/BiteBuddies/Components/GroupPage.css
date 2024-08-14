@@ -1,33 +1,28 @@
-.Container{
-    width:auto;
-    max-width: 100%;
-}
-
-.collabHistoryContainer{
+.group-page-container {
     display: flex;
-    flex-direction: column;
+    position: relative;
+    flex-direction:column;
+    justify-content: center;
     align-items: center;
-    padding:10px;
-    margin:10px;
-    background-color: wheat;
-    width: 100%;
+    max-width: 900px;
+    max-height: 1500px;
+    min-width: 500px;
+    padding: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background-color: #ffe7b3;
+    border-radius: 20px;
+    margin-bottom: 10px;
 }
 
-.collabUsersContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding:10px;
-    margin:10px;
-    background-color: wheat;
-    width: 100%;
+.group-header {
+    color: #582c1b;
 }
 
-.GroupHeader {
+.group-header {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: blanchedalmond;
     gap: 10px;
     padding: 10px;
     margin: 10px;
@@ -46,9 +41,95 @@
 .GroupName {
     font-weight: bold;
     font-size: xx-large;
+    margin-top: 20px;
+}
+
+.active-collab {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color: #ffefd2;
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.collab-users-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:10px;
+    margin:10px;
+    background-color: transparent;
+    width: 100%;
+    color:#582c1b;
+}
+
+.collab-users {
+    background-color: transparent;
+}
+
+
+.collab-history {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    min-width: 500px;
+    max-height: 400px;
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color: #ffefd2;
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.collab-history-container {
+    margin-top:5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.collab-history-container::-webkit-scrollbar {
+    display: auto;
+    position: fixed;
+    right: 0;
+    width: 10px;
+    scroll-behavior: smooth;
+}
+
+.collab-history-container::-webkit-scrollbar-track {
+    background: transparent;
+    align-items: right;
+    margin-left: 10px;
+}
+
+.collab-history-container::-webkit-scrollbar-thumb {
+    background-color: orange;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+
+.delete-btn {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .confirmDelete {
     display: flex;
     flex-direction: column;
+}
+
+span{
+    color:#582c1b;
 }

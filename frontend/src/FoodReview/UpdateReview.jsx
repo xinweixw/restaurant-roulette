@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 import RestaurantBackend from '../apis/RestaurantBackend';
 import { toast } from 'react-toastify';
+import "./RestaurantPage.css";
 
 const UpdateReview = (props) => {
     const { id, reviewid } = useParams();
@@ -49,7 +50,7 @@ const UpdateReview = (props) => {
     return (
         <div>
             <form onSubmit={handleSubmit} >
-                <div className="container">
+                <div className="update-review-container">
                     <div className="mb-2">
                         <label htmlFor="star">Rating</label>
                         <select className="form-select" value={star} onChange={e => setStar(e.target.value)} id="star" type="text" required>
@@ -66,10 +67,10 @@ const UpdateReview = (props) => {
                         <textarea value={reviewField} onChange={e => setReviewField(e.target.value)}
                             id="review" className="form-control" required></textarea>
                     </div>
-                    <button type="submit" className="btn btn-info">Update Review</button>
+                    <button type="submit">Update Review</button>
                 </div>
             </form>
-            <button className="btn btn-outline-dark my-2" onClick={(e) => navigate(`/restaurants/${id}`)} >Cancel</button>
+            <button onClick={(e) => navigate(`/restaurants/${id}`)} >Cancel</button>
         </div>
     )
 };

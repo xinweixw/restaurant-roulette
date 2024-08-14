@@ -1,6 +1,167 @@
-.input {
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
-    
+.create-group-container {
+    display: flex;
+    position: relative;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    max-height: 600px;
+    padding: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    gap: 10px;
+    background-color: #ffe7b3;
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 10px;
 }
+
+.bb-header {
+    color:#582c1b;
+    font-weight: 500;
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.input {
+    background-color: #fcfaf1;
+    padding: 20px;
+    margin: 10px;
+    width: 400px;   
+    height: 50px;
+    border-radius: 15px;
+}
+
+.input:focus {
+    background-color: #fcfaf1;
+}
+
+.groupDesc {
+    margin: 0px;
+    color: #582c1b;
+    font-weight: 500;
+}
+
+.group-members {
+    width: 85%;
+    min-height: 100px;
+    max-height: 200px;
+    background-color: transparent;
+    overflow-y: scroll;
+}
+
+.group-members::-webkit-scrollbar {
+    display: auto;
+    position: fixed;
+    right: 0;
+    width: 10px;
+    scroll-behavior: smooth;
+}
+
+.group-members::-webkit-scrollbar-track {
+    background: transparent;
+    align-items: right;
+    margin-left: 10px;
+}
+
+.group-members::-webkit-scrollbar-thumb {
+    background-color: orange;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+.group-member {
+    width: 95%;
+    height: 40px;
+    margin: 5px;
+    background-color:#ffda8b;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.group-member:hover {
+    transform: scale(1.03);
+    background-color: #ffe7b3;
+    text-decoration: line-through;
+}
+
+
+.group-member i {
+    font-size: 30px;
+    position:absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.group-member:hover i {
+    color: white;
+}
+
+.user-list {
+    position: absolute;
+    top: 225px;
+    width: 90%;
+    max-height: 80px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    overflow-y: scroll;
+    background-color: #ffefd2;
+    box-shadow: 0 2px 4px #582c1b28;
+    color:#582c1b;
+}
+
+
+.user-list::-webkit-scrollbar {
+    display: auto;
+    position: fixed;
+    right: 0;
+    width: 10px;
+    scroll-behavior: smooth;
+}
+
+.user-list::-webkit-scrollbar-track {
+    background: transparent;
+    align-items: right;
+    margin-left: 10px;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+    background-color: orange;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+
+.search-user:hover {
+    width: 100%;
+    background-color: #ffda8b;
+    color:#582c1b;
+
+}
+
+/* 
+.group-member .underline {
+    font-size: 30px;
+    position:absolute;
+    right: 0px;
+    z-index: 100;
+} */
+
+
+
+/* .remove-member-btn {
+    background-color: transparent;
+    position: absolute;
+    right: 0px;
+}
+
+.remove-member-btn i {
+    font-size: 30px;
+}
+
+.remove-member-btn:hover {
+    background-color: transparent;
+} */

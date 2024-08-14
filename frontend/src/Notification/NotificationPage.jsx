@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import NotificationBackend from '../apis/NotificationBackend';
 import Notifications from './Notifications';
 import "./Notification.css";
+import "../assets/backButton.css";
 
 
 const NotificationPage = () => {
@@ -97,10 +98,10 @@ const NotificationPage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("/food-search")} className="back-button"><i className="fa-solid fa-chevron-left"></i></button>
-      <div className = "container" style={{background:'transparent'}}>
+      {/* <button onClick={() => navigate("/food-search")} className="back-button"><i className="fa-solid fa-chevron-left"></i></button> */}
+      <div className = "overall-notif-container" style={{background:'transparent'}}>
         <h1>Notifications Page</h1>
-        <h5>You have {unreadNotifs.length} unread {unreadNotifs.length < 1 ? "notification" : "notifications"}</h5>
+        <h5 style={{color:"#582c1b"}}>You have {unreadNotifs.length} unread {unreadNotifs.length < 1 ? "notification" : "notifications"}</h5>
         <div className= "button-container">
           {notifs.length < 1 ? (
             <>
@@ -119,10 +120,10 @@ const NotificationPage = () => {
             </>
           )}
         </div>
-      </div>
 
       <div className="notifs-container">
         <Notifications notifs={notifs} setNotifs={setNotifs} />
+      </div>
       </div>
     </div>
   )

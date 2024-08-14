@@ -7,7 +7,7 @@ const QuizPage = () => {
 
     return (
         <>
-            <div className="container text-center my-3">
+            <div className="roulette-container text-center my-3">
 
                 <div className="icon-container">
                     <i className='bx bxs-pear'></i>
@@ -17,7 +17,7 @@ const QuizPage = () => {
                     <i className='bx bxs-bowl-rice'></i>
                 </div>
 
-                <h1>Random Restaurant Generator</h1>
+                <h1 className="Title">Random Restaurant Generator</h1>
                 <span className="my-3">take a short quiz & get your next restaurant!</span>
             </div>
             {/* Corrected onClick handler */}

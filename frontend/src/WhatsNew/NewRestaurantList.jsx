@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../FoodSearch/components/ResultRestaurant.css';
 import StarRating from '../FoodReview/StarRating';
-import "../FoodSearch/components/SearchAutofillKey.css"
+import "./WhatsNewPage.css";
 
 const NewRestaurantList = ({ newRestaurants }) => {
     const navigate = useNavigate();
@@ -10,21 +10,21 @@ const NewRestaurantList = ({ newRestaurants }) => {
         <div>
             {newRestaurants.map((restaurant) => {
                 return (
-                        <div className="ResultRestaurantKey" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
+                        <div className="whatsnew-restaurant" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
                             <img src={restaurant.image_url} alt={restaurant.rest_name} className="restImage" />
-                            <div className='row1'>
-                                <div className="info-row">
-                                    <div className="restName">{restaurant.rest_name}</div>
-                                    <div className="rating"><StarRating stars={restaurant.average_star} /></div>
+                            <div className='whatsnew-row1'>
+                                <div className="whatsnew-info-row">
+                                    <div className="whatsnew-restName">{restaurant.rest_name}</div>
+                                    <div className="whatsnew-rating"><StarRating stars={restaurant.average_star} /></div>
                             </div>
-                            <div className="info-row">
-                                <div className="cuisine">
+                            <div className="whatsnew-info-row">
+                                <div className="whatsnew-cuisine">
                                     <i className='bx bxs-bowl-rice'></i>
                                     {restaurant.cuisine}</div>
-                                <div className="priceRange">{restaurant.rest_price}</div>
+                                <div className="whatsnew-priceRange">{restaurant.rest_price}</div>
                             </div>
-                            <div className="info-row">
-                                <div className='location'>
+                            <div className="whatsnew-info-row">
+                                <div className='whatsnew-location'>
                                     <i className='bx bx-map'></i>
                                     {restaurant.rest_location}</div>
                             </div>

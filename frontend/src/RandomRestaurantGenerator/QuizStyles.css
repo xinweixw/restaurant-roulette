@@ -1,10 +1,15 @@
 /* General container styling */
-.container {
-    max-width: 800px;
+.roulette-container {
+    max-width:700px;
     margin: auto;
     padding: 1rem;
     background-color: #ffda8b;
     color: #582c1b;
+    border-radius: 20px;
+}
+
+.Title {
+    color:#582c1b;
 }
 
 

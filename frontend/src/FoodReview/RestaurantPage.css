@@ -1,0 +1,53 @@
+.review-btn {
+    margin: 5px;
+}
+
+.update-review-container {
+    background-color: #ffe7b3;
+    padding: 20px;
+    border-radius: 20px;
+    color: #582c1b;
+    font-weight: 500;
+    margin: 10px;
+
+}
+
+select {
+    background-color: #fcfaf1;
+}
+
+
+.review-container {
+    display: flex;
+    position: relative;
+    flex-direction:column;
+    justify-self: center;
+    align-self: center;
+    padding: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background-color: #ffe7b3;
+    width: 50%;
+    border-radius: 20px;
+    margin:auto;
+    font-weight:500;
+    color:#582c1b;
+}
+
+.add-review-btn {
+    width:150px;
+    margin:auto;
+}
+
+.add-fav-button {
+    margin: 5px;
+}
+
+.add-fav-button:disabled {
+    background-color: #f0e6cc;
+    color:gray;
+}
+
+.add-fav-button:disabled:hover {
+    transform: none;
+}

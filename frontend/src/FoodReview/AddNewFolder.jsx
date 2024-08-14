@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FavouritesBackend from '../apis/FavouritesBackend';
 import { toast } from 'react-toastify';
+import "./RestaurantPage.css";
 
 const AddNewFolder = ({setIsClicked, createNewFolder, folderNames}) => {
     const [fName, setFName] = useState("");

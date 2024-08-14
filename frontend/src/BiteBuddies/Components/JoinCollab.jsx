@@ -142,10 +142,11 @@ const JoinCollab = ({ currentUser, chatId , collabId, setIHaveCollabed, fetchCol
     };
 
     return (
-        <div className="Container">
+        <div className="join-collab-container">
             <h2>Join Collaboration</h2>
 
             <form onSubmit={handleSubmit}>
+                <div className="collab-form">
                 <div className="form-group">
                     <label htmlFor="restrictions">Select a dietary requirement:</label>
                     <select
@@ -196,8 +197,9 @@ const JoinCollab = ({ currentUser, chatId , collabId, setIHaveCollabed, fetchCol
                         ))}
                     </select>
                 </div>
+                </div>
 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     );

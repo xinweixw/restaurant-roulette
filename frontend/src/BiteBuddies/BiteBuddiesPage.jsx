@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import supabase from '../FoodSearch/config/SupabaseClient';
 import Loading from '../assets/Loading';
 import BiteBuddiesBackend from '../apis/BiteBuddiesBackend';
+import "./BiteBuddiesPage.css";
 
 const BiteBuddies = () => {
     const navigate = useNavigate();
@@ -68,11 +69,12 @@ const BiteBuddies = () => {
     }
 
     return (
-        <div className="Container">
+        <div className="bitebuddies-container">
             <div className="TopicName">Bite Buddies</div>
 
-            <h1 className="header">Groups</h1>
+            <h1 className="header">Find buddies for a bite!</h1>
 
+            <div className="search-container">
             <div className="search-bar">
                 <input
                     type="text"
@@ -80,11 +82,17 @@ const BiteBuddies = () => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                 />
-                <button onClick={handleSearch}><i className="fa-solid fa-magnifying-glass"></i></button>
-                <button onClick={handleCreateNewGroup}>Create New Group</button>
+                <button className="search-button" onClick={handleSearch}><i className="fa-solid fa-magnifying-glass"></i></button>
             </div>
 
-            <button onClick={clearInput}>Show All Groups</button>
+            {input ? (<button className="show-all-button" onClick={clearInput}>Show All</button>) : 
+                     (<button className="show-all-button" disabled>Show All</button>) }
+            
+            <button className='create-group-button' onClick={handleCreateNewGroup}>
+                <i className='bx bx-plus-circle'></i>
+            </button>
+
+            </div>
 
             <div className="groups">
                 {groupLoading ? (

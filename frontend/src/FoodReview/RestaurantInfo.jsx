@@ -3,6 +3,7 @@ import StarRating from './StarRating';
 import { toast } from 'react-toastify';
 import RestaurantBackend from '../apis/RestaurantBackend';
 import { useNavigate } from 'react-router-dom';
+import "./RestaurantPage.css";
 
 const RestaurantInfo = ({oneRestaurant, setIsClicked, inFav, setInFav, addFavFolder, setIsAdding}) => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const RestaurantInfo = ({oneRestaurant, setIsClicked, inFav, setInFav, addFavFol
             <img src={oneRestaurant.image_url} className="img-thumbnail rounded float-end" alt="Food place logo" style={{maxWidth: "90%"}}/>
           </div>
           <div className="col text-center">
-            <h4 className="display-4">{oneRestaurant.rest_name}</h4>
+            <h4 className="display-4" style={{color:"#582c1b", fontWeight:"600"}}>{oneRestaurant.rest_name}</h4>
             <span>Cuisine: {oneRestaurant.cuisine}</span><br></br>
             <span>Halal/Vegetarian: {oneRestaurant.special_conditions}</span><br />
             <span>Price Range: {oneRestaurant.rest_price}</span><br />
@@ -70,10 +71,10 @@ const RestaurantInfo = ({oneRestaurant, setIsClicked, inFav, setInFav, addFavFol
             </span><br />
             {/* added for add to favourites */}
             <div className="btn-group my-1 p-2" role="group" aria-label="Add and Delete">
-              <button onClick={() => setIsClicked(true)} className="btn btn-primary">Add to Favourites</button>
-              {inFav.length < 1 ? (<button className="btn btn-secondary" disabled>Remove from Favourites</button>) :
-              (<button onClick={handleDelete} className="btn btn-info">Remove from Favourites</button>)}
-              <button onClick={() => setIsAdding(true)} className="btn btn-light"><i className="fa-solid fa-plus"></i><i className="fa-regular fa-folder"></i></button>
+              <button onClick={() => setIsClicked(true)} className="add-fav-button">Add to Favourites</button>
+              {inFav.length < 1 ? (<button className="add-fav-button" disabled>Remove from Favourites</button>) :
+              (<button onClick={handleDelete} className="add-fav-button">Remove from Favourites</button>)}
+              <button onClick={() => setIsAdding(true)} className="add-fav-button"><i className="fa-solid fa-plus"></i><i className="fa-regular fa-folder"></i></button>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import supabase from '../../FoodSearch/config/SupabaseClient';
+import "../BiteBuddiesPage.css";
 
 const SearchUsers = ({ groupMembers, currentUser, input, onAddMember }) => {
     const [userList, setUserList] = useState([]);
@@ -29,7 +30,7 @@ const SearchUsers = ({ groupMembers, currentUser, input, onAddMember }) => {
     return (
         <div className="user-list">
             {filteredUserList.map((user) => (
-                <div key={user.user_id} onClick={() => onAddMember(user)}>
+                <div className="search-user" key={user.user_id} onClick={() => onAddMember(user)}>
                     {user.user_name}
                 </div>
             ))}

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import Loading from '../../assets/Loading';
 import { ResultRestaurant } from '../../FoodSearch/components/ResultRestaurant';
 import StarRating from '../../FoodReview/StarRating';
+import "./GenerateRestaurant.css";
 
 const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResults }) => {
     const navigate = useNavigate();
@@ -210,23 +211,34 @@ const GenerateRestaurant = ({ id, collabId, restaurantList, setCollabId, setResu
     }
 
     return (
-        <div className="container">
-            {percentageMatch && <div>{percentageMatch}% Match</div>}
+        <div>
+        <div className="collab-result-container">
+            <div className="collab-header">Your Next Bite:</div>
+            {percentageMatch && <div style={{color:"#582c1b"}}>{percentageMatch}% Match</div>}
             {restaurant && (
-                <div className="d-flex justify-content-between">
-                    <div className="ResultRestaurantKey" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
-                        <img src={restaurant.image_url} alt={restaurant.rest_name} className="restImage" />
-                        <div className='row1'>
-                            <div className="restName">{restaurant.rest_name}</div>
-                            <div className="priceRange">{restaurant.rest_price}</div>
-                            <div className="rating"><StarRating stars={restaurant.average_star} /> {restaurant.average_star} ({restaurant.num_review})</div>
-                            <div className="cuisine">{restaurant.cuisine}</div>
-                            <div className='location'>{restaurant.rest_location}</div>
-                        </div>
-                    </div>
+                    <div className="ResultRestaurantKey" onClick={() => onSelect(restaurant.rest_id)}>
+                            <img src={restaurant.image_url} alt={restaurant.rest_name} className="restImage" />
+                            <div className='row1'>
+                                <div className="info-row">
+                                    <div className="restName">{restaurant.rest_name}</div>
+                                    <div className="rating"><StarRating stars={restaurant.average_star} /></div>
+                                </div>
+                                <div className="info-row">
+                                    <div className="cuisine">
+                                        <i className='bx bxs-bowl-rice'></i>
+                                        {restaurant.cuisine}</div>
+                                    <div className="priceRange">{restaurant.rest_price}</div>
+                                </div>
+                                <div className="info-row">
+                                    <div className='location'>
+                                        <i className='bx bx-map'></i>
+                                        {restaurant.rest_location}</div>
+                                </div>
+                            </div>
                 </div>
             )}
-            <button onClick={handleReturnToGroupPage} className="generate-button">Return to Group Page</button>
+            </div>
+            <button onClick={handleReturnToGroupPage}>Return to Group Page</button>
         </div>
     );
 };

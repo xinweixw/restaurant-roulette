@@ -125,7 +125,7 @@ const LoginSignupConnected = ({ setAuth }) => {
     }
 
     return (
-        <div className='container'>
+        <div className='login-container'>
             <div className='header'>
                 <div className="text">Restaurant Roulette</div>
                 <div className='underline'></div>
@@ -141,7 +141,7 @@ const LoginSignupConnected = ({ setAuth }) => {
             <form onSubmit={handleSubmit} onKeyDown={handleKeyPress}>
                 <div className='inputs'>
                     {action === "Login" ? null : (
-                        <div className="input" style={{ background: '#fff8e7', borderRadius:10 }}>
+                        <div className="login-input" style={{ background: '#fff8e7', borderRadius:10 }}>
                             <i className='bx bx-user' alt="" />
                             <input
                                 type="text"
@@ -152,7 +152,7 @@ const LoginSignupConnected = ({ setAuth }) => {
                             />
                         </div>
                     )}
-                    <div className='input' style={{ background: '#fff8e7', borderRadius:10 }}>
+                    <div className='login-input' style={{ background: '#fff8e7', borderRadius:10 }}>
                         <i className='bx bx-envelope' alt="" />
                         <input
                             type="email"
@@ -162,7 +162,7 @@ const LoginSignupConnected = ({ setAuth }) => {
                             onChange={(e) => onChange(e)} 
                         />
                     </div>
-                    <div className='input' style={{ background: '#fff8e7', borderRadius:10 }}>
+                    <div className='login-input' style={{ background: '#fff8e7', borderRadius:10 }}>
                         <i className='bx bxs-lock-alt' alt="" />
                         <input
                             type="password"
