@@ -21,7 +21,7 @@ export const SearchBar = ({ handleSearch, input, setInput, setShowAutofill , set
 
     return (
         <div className="input-wrapper">
-            <input className='input'
+            <input className='input' style={{ background: 'transparent'}}
                 placeholder="Search restaurant name, cuisine, or location..."
                 value={input}
                 readOnly={isReadOnly}

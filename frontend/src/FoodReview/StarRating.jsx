@@ -1,4 +1,6 @@
 import React from 'react';
+import "./RestaurantPage.css";
+
 
 const StarRating = ({ stars }) => {
     const numStars = [];

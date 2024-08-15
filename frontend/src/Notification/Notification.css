@@ -1,0 +1,77 @@
+.bell {
+    font-size: 15px;
+    justify-self: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid orangered;
+    color: #582c1b;
+}
+
+.bell:hover {
+    background-color: #fcfaf1;
+    border: 1px solid orangered;
+}
+
+.overall-notif-container {
+    background-color: black;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 90%;
+    margin: auto;
+}
+
+
+h1 {
+    color: orange;
+    margin-bottom: 20px;
+}
+
+h5 {
+    margin: 20px;
+    margin-bottom: 30px;
+}
+
+.button-container {
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.overall-btn {
+    width: 100%;
+}
+
+.overall-btn:disabled {
+    background-color: #f0e6cc;
+    color:gray;
+}
+
+.notif-btn {
+    width: 100%;
+    margin: 3px;
+}
+
+.notif-btn:disabled {
+    background-color: #f0e6cc;
+    color:gray;
+}
+
+.card {
+    background-color: #fcfaf1;
+    border-radius: 20px;
+    border:none;
+    box-shadow: 0 2px 4px #582c1b28;
+}
+
+.card-body, .card-footer {
+    color:#582c1b;
+    background-color: transparent;
+}

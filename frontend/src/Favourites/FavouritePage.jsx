@@ -30,6 +30,11 @@ const FavouritePage = () => {
             return;
         }
 
+        if (!fName) {
+            toast.error("Please name your folder!");
+            return;
+        }
+
         if (fName.toLowerCase() === 'all') {
             setErrMsg("Please enter a different name. 'All' is not allowed");
             return;
@@ -90,10 +95,10 @@ const FavouritePage = () => {
     }
 
     return (
-        <div>
-            <h1 className="text-warning text-center">Favourites</h1>
+        <div className='fav-container'>
+            <h1 className="fav-header">Favourites</h1>
             <br />
-            <button onClick={() => setIsClicked(true)} className="btn btn-primary">Add Folder</button>
+            <button onClick={() => setIsClicked(true)}>Add Folder</button>
 
             <div className="my-3">
                 {allFolders && (
@@ -112,7 +117,7 @@ const FavouritePage = () => {
                         required
                     />
                     {errMsg && <p>{errMsg}</p>}
-                    <button onClick={handleSubmit} className="btn btn-primary ms-2" type="submit">Add</button>
+                    <button onClick={handleSubmit} type="submit">Add</button>
                 </form>
             </Popup>
         </div>

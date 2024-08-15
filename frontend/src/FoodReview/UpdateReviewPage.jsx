@@ -1,5 +1,6 @@
 import React from 'react';
 import UpdateReview from './UpdateReview';
+import "./RestaurantPage.css";
 
 const UpdateReviewPage = () => {
   return (

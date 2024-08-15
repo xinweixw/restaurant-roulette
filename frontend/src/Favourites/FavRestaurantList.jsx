@@ -4,6 +4,8 @@ import StarRating from '../FoodReview/StarRating';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FavouritesBackend from '../apis/FavouritesBackend';
+import "./FolderPage.css";
+
 
 const FavRestaurantList = ({folder, restaurants, setPresentRestaurant}) => {
     const navigate = useNavigate();
@@ -36,12 +38,31 @@ const FavRestaurantList = ({folder, restaurants, setPresentRestaurant}) => {
     
     return (
         <div>
-            <p className="text-left justify-content-start">{restaurants.length} Restaurants</p>
+            <p className="search-results-list">{restaurants.length} Restaurants</p>
             {restaurants.map((restaurant) => {
                 return (
                     <>
-                        <div className="d-flex justify-content-between">
-                            <div className="ResultRestaurantKey" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
+                        <div className="result-container">
+                            <div className="whatsnew-restaurant" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
+                                <img src={restaurant.image_url} alt={restaurant.rest_name} className="restImage" />
+                                <div className='whatsnew-row1'>
+                                    <div className="whatsnew-info-row">
+                                        <div className="whatsnew-restName">{restaurant.rest_name}</div>
+                                        <div className="whatsnew-rating"><StarRating stars={restaurant.average_star} /></div>
+                                </div>
+                                <div className="whatsnew-info-row">
+                                    <div className="whatsnew-cuisine">
+                                        <i className='bx bxs-bowl-rice'></i>
+                                        {restaurant.cuisine}</div>
+                                    <div className="whatsnew-priceRange">{restaurant.rest_price}</div>
+                                </div>
+                                <div className="whatsnew-info-row">
+                                    <div className='whatsnew-location'>
+                                        <i className='bx bx-map'></i>
+                                        {restaurant.rest_location}</div>
+                                </div>
+                            </div>
+                            {/* <div className="ResultRestaurantKey" onClick={() => navigate(`/restaurants/${restaurant.rest_id}`)}>
                                 <img src={restaurant.image_url} alt={restaurant.rest_name} className="restImage" />
                                 <div className='row1'>
                                     <div className="restName">{restaurant.rest_name}</div>
@@ -52,7 +73,7 @@ const FavRestaurantList = ({folder, restaurants, setPresentRestaurant}) => {
                                 </div>
                                 {/* <button><i className="fa-solid fa-trash"></i></button> */}
                             </div>
-                            {folder.folder_name.toLowerCase() !== "all" ? (<button onClick={(e) => handleDelete(e, restaurant.rest_id, restaurant.folder_id)} className="btn"><i className="fa-solid fa-trash"></i></button>) : ""}
+                            {folder.folder_name.toLowerCase() !== "all" ? (<button onClick={(e) => handleDelete(e, restaurant.rest_id, restaurant.folder_id)}><i className="fa-solid fa-trash"></i></button>) : ""}
                         </div>
                     </>
 

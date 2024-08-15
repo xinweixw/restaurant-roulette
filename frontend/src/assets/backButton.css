@@ -1,0 +1,12 @@
+.back-button {
+    position: fixed;
+    left: 90px;
+    top: 20px;
+    background-color: transparent;
+}
+
+.back-button:hover {
+    background-color: transparent;
+    color: orange;
+    transform: scale(1.5);
+}

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import RandomQuizBackend from '../apis/RandomQuizBackend';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import "./QuizStyles.css";
+
 
 const QuizQuestions = () => {
     const [questions, setQuestions] = useState([]);
@@ -91,20 +93,25 @@ const QuizQuestions = () => {
                     {questions.map((question, index) => {
                         return (
                             <div key={index}>
-                                <p>{question.qns}</p>
+                                <p className="question">{question.qns}</p>
                                 <div>
                                     {question.options.map((option, optIndex) => {
+                                        const value = index < 2 ? option.opt : option.points;
                                         return (
-                                            <div className="align-left">
+                                            <div
+                                                key={optIndex} 
+                                                className={`option-container ${answers[qnNum] === value ? 'selected' : ''}`}
+                                                onClick={() => selectOption(optIndex, value)}
+                                            >
                                                 <input
                                                     type="radio"
-                                                    className="form-check-input"
+                                                    className="option-input"
                                                     name={`question-${index}`}
-                                                    value={index < 2 ? option.opt : option.points}
+                                                    value={value}
                                                     id={optIndex}
                                                     onChange={() => selectOption(index, index < 2 ? option.opt : option.points)}
                                                 />
-                                                <label className="form-check-label" htmlFor={optIndex}>
+                                                <label className="option-label" htmlFor={optIndex}>
                                                     {option.opt}
                                                 </label>
                                                 <br />

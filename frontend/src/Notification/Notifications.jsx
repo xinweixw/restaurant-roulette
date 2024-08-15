@@ -1,5 +1,7 @@
 import React from 'react';
 import NotificationBackend from '../apis/NotificationBackend';
+import "./Notification.css";
+
 
 const Notifications = ({ notifs, setNotifs }) => {
 
@@ -59,8 +61,8 @@ const Notifications = ({ notifs, setNotifs }) => {
               <h5 className="card-title text-start">{notif.notif_type}</h5>
               <p className="card-text text-start">{notif.notif_msg}</p>
               <div className="btn-group d-flex justify-content-end" role="group">
-                {notif.is_read ? (<button className="btn btn-primary btn-sm" disabled>Read</button>) : (<button className="btn btn-primary btn-sm" type="button" onClick={(e) => handleClick(e, notif.notif_id, index)}>Mark As Read</button>)}
-                <button className="btn btn-sm btn-outline-dark" type="button" onClick={e => handleDelete(e, notif.notif_id)}><i className="fa-solid fa-x"></i></button>
+                {notif.is_read ? (<button className="notif-btn" disabled>Read</button>) : (<button className="notif-btn" type="button" onClick={(e) => handleClick(e, notif.notif_id, index)}>Mark As Read</button>)}
+                <button className="notif-btn" type="button" onClick={e => handleDelete(e, notif.notif_id)}><i className="fa-solid fa-x"></i></button>
               </div>
             </div>
             <div className="card-footer d-flex justify-content-end">

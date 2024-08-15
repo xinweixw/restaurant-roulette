@@ -1,5 +1,18 @@
-.ResultRestaurantKey {
-    width: 100%;
+.whatsnew-container {
+    width: 90%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding-right: 15px;
+    margin: auto;
+    max-height: 650px;
+}
+
+.whatsnew-restaurant {
+    width: 700px;
+    height: 100px;
+    padding: 10px 20px;
     background-color:#ffe7b3;
     margin: 8px;
     border-radius: 8px;
@@ -8,24 +21,23 @@
     align-items: center;
     min-height: 10rem;
     position: relative;
-    box-sizing: border-box;
+    overflow: hidden;
 }
 
-.ResultRestaurantKey:hover {
+.whatsnew-restaurant:hover {
     background-color: orange;
 }
 
-.restImage {
+.whatsnew-restImage {
     position:absolute;
     height: 85%;
-    width: 25%;
     left: 1%;
     object-fit: cover;
     border-radius: 15px;
     margin: 10px;
 }
 
-.row1 {
+.whatsnew-row1 {
     background-color: transparent;
     display: flex;
     flex-direction: column; /* Stack items vertically */
@@ -39,21 +51,21 @@
     font-weight:500;
 }
 
-.restName {
+.whatsnew-restName {
     font-size: 30px;
     font-weight: bold;
     color: #582c1b;
     text-align: left;
 }
 
-.info-row {
+.whatsnew-info-row {
     display: flex;
     align-items: flex-start;
     width: 100%; /* Full width of row1 */
     justify-content: space-between; /* Distribute space between items */
 }
 
-.rating {
+.whatsnew-rating {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -61,22 +73,7 @@
     margin-right: 5px;
 }
 
-.cuisine, .priceRange, .rating, .location{
+.whatsnew-cuisine, .whatsnew-priceRange, .whatsnew-rating, .whatsnew-location{
     color: #8b5c49;
     margin: 5px;
-}
-
-
-@media (max-width: 768px) {
-    .restImage {
-        width: 30%; /* Adjust for smaller screens */
-    }
-    
-    .row1 {
-        width: 100%;
-    }
-    
-    .info-row {
-        flex-direction: column; /* Stack vertically on small screens */
-    }
 }

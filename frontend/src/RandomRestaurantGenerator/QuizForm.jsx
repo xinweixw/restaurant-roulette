@@ -5,6 +5,10 @@ import RandomQuestion from './RandomQuestion';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../Favourites/Popup';
+// import "./QuizForm.css";
+import "./QuizForm.css";
+import Loading from '../assets/Loading';
+
 
 const QuizForm = () => {
     const [qn, setQn] = useState(0);
@@ -100,9 +104,8 @@ const QuizForm = () => {
     }
 
     if (loading) {
-        return (<h1 className="loadIcon">
-          <i className="bx bx-loader-circle bx-spin"/>
-          </h1>);
+        return (
+            <h1><Loading/></h1>);
     }
 
     return (
@@ -112,24 +115,24 @@ const QuizForm = () => {
                     <div className="questions container">
                         {questionDisplay(qn)}
                     </div>
-                    <div className="btn-group my-3 p-3" role="group">
+                    <div className="btn-group" role="group">
                         <button
-                            className="btn btn-primary"
+                            className="btn"
                             disabled={qn === 0}
                             type="button"
                             onClick={() => setQn((currQn) => currQn - 1)}
                         >
-                            <i className="fa-solid fa-chevron-left"></i> Prev
+                            <i className="fa-solid fa-chevron-left"></i>
                         </button>
                         {qn === questions.length - 1 ?
-                            <button className="btn btn-primary" type="submit" disabled={answers.includes(0)}>Submit</button>
+                            <button className="btn" type="submit" disabled={answers.includes(0)}>Submit</button>
                             :
                             <button
-                                className="btn btn-primary"
+                                className="btn"
                                 type="button"
                                 onClick={() => setQn((currQn) => currQn + 1)}
                             >
-                                Next <i className="fa-solid fa-chevron-right"></i>
+                                <i className="fa-solid fa-chevron-right"></i>
                             </button>
                         }
                     </div>
@@ -137,25 +140,25 @@ const QuizForm = () => {
             )}
             <Popup isClicked={isClicked} setIsClicked={setIsClicked}>
                 {recommendation ? (
-                    <div className="border">
+                    <div className="popup-content">
                         <h2>Recommended Restaurant: </h2><br />
                         <div onClick={e => navigate(`/restaurants/${recommendation.rest_id}`)}>
                             <img src={recommendation.image_url} className="rounded-float-end" alt="restaurant logo" style={{maxWidth: "80%"}}/>
                             <br />
-                            <h2>{recommendation.rest_name}</h2>
+                            <h3>{recommendation.rest_name}</h3>
                             {/* <button onClick={e => navigate(`/restaurants/${recommendation.rest_id}`)} className="btn btn-outline-primary">View Restaurant Page</button> */}
                             <br />
                         </div>
                         <div>
-                            <button className="btn btn-primary" onClick={e => navigate("/random-restaurant-generator")} >Take the Quiz Again</button>
+                            <button className="btn-popup" onClick={e => navigate("/random-restaurant-generator")} >Take the Quiz Again</button>
                         </div>
                     </div>
                 ) : (
-                    <div className="border">
+                    <div className="popup-content">
                         <h2 className="text-start">Sorry it looks like there are no restaurants that match your preferences! Please take the quiz again. <i className="fa-regular fa-face-grin-beam-sweat"></i></h2>
                         <div className="my-2 p-2">
-                            <button className="btn btn-info mx-2" onClick={e => setIsClicked(false)}>Edit Preferences</button>
-                            <button className="btn btn-primary" onClick={e => navigate("/random-restaurant-generator")} >Take the Quiz Again</button>
+                            <button className="btn-popup" onClick={e => setIsClicked(false)}>Edit Preferences</button>
+                            <button className="btn-popup" onClick={e => navigate("/random-restaurant-generator")} >Take the Quiz Again</button>
                         </div>
                     </div>
                 )}

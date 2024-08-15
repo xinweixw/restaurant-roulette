@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import "./QuizStyles.css";
 
 const RandomQuestion = ({ qnNum, questions, answers, setAnswers }) => {
   const theQuestion = questions[qnNum];
+  const [optSelected, setOptSelected] = useState([]);
 
   useEffect(() => {
     if (theQuestion) {
@@ -21,19 +23,26 @@ const RandomQuestion = ({ qnNum, questions, answers, setAnswers }) => {
       <h3 className="text-center">{questions[qnNum].qns}</h3>
       <div>
         {questions[qnNum].options.map((option, optIndex) => {
+          const value = qnNum < 2 ? option.opt : option.points;
           return (
-            <div key={optIndex} className="d-flex align-content-start">
+            <div 
+              key={optIndex} 
+              className={`option-container ${answers[qnNum] === value ? 'selected' : ''}`}
+              // onClick={() => selectOption(optIndex, value)}
+            >
               <input
                 type="radio"
-                className="form-check-input"
+                className="option-input"
                 name={`question-${qnNum}`}
                 value={qnNum < 2 ? option.opt : option.points}
                 id={optIndex}
                 onChange={() => selectOption(qnNum, qnNum < 2 ? option.opt : option.points)}
                 checked={answers[qnNum] === option.points}
               />
-              <label className="form-check-label" htmlFor={optIndex}>
-                {option.opt}
+              <label 
+                  className={`option-label ${answers[qnNum] === value ? 'selected' : ''}`}
+                  htmlFor={optIndex}>
+                    {option.opt}
               </label>
             </div>
           )

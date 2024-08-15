@@ -14,10 +14,12 @@
 
 .sidebar:hover {
     width: 250px;
+    border-right: 1.5px dotted orange;
 }
 
 .sidebar.open {
     width: 250px;
+    border-right: 1.5px dotted orange;
 }
 
 .sidebar .mainContent {
@@ -52,11 +54,11 @@
 
 .sidebar.open .menuIcon {
     border-radius: 0%;
-    background-color:#f8c558;
+    background-color:#ffc13a;
 }
 
 .user {
-    background-color: #f8c558;
+    background-color: #ffc13a;
     display: flex;
     align-items: center;
     margin: 1rem 0;
@@ -111,12 +113,13 @@
 }
 
 .sidebar ul li a {
-    color: rgb(88, 44, 27);
+    color: #582c1b;
     display: flex;
     align-items: center;
     text-decoration: none;
     border-radius: 0.8rem;
     padding: 10px;
+    font-weight: 600;
 }
 
 .sidebar ul li a:hover {

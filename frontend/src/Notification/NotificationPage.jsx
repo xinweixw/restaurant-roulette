@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NotificationBackend from '../apis/NotificationBackend';
 import Notifications from './Notifications';
+import "./Notification.css";
+import "../assets/backButton.css";
+
 
 const NotificationPage = () => {
   const navigate = useNavigate();
@@ -95,32 +98,32 @@ const NotificationPage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("/food-search")} className="justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
-      <div>
-        <h1 className="text-center">Notification Page</h1>
-        <h5 className="text-center my-2 p-3">You have {unreadNotifs.length} unread {unreadNotifs.length < 1 ? "notification" : "notifications"}</h5>
-        <div className="d-flex justify-content-end">
+      {/* <button onClick={() => navigate("/food-search")} className="back-button"><i className="fa-solid fa-chevron-left"></i></button> */}
+      <div className = "overall-notif-container" style={{background:'transparent'}}>
+        <h1>Notifications Page</h1>
+        <h5 style={{color:"#582c1b"}}>You have {unreadNotifs.length} unread {unreadNotifs.length < 1 ? "notification" : "notifications"}</h5>
+        <div className= "button-container">
           {notifs.length < 1 ? (
             <>
-              <button type="button" className="btn btn-primary" disabled>Mark All as Read</button>
-              <button type="button" className="btn btn-secondary" disabled>Clear All</button>
+              <button className="overall-btn" disabled={true}>Mark All as Read</button>
+              <button className="overall-btn" disabled={true}>Clear All</button>
             </>
           ) : unreadNotifs.length < 1 ? (
             <>
-              <button type="button" className="btn btn-info" disabled>Mark All as Read</button>
-              <button type="button" className="btn btn-secondary" onClick={e => handleClear(e)}>Clear All</button>
+              <button className="overall-btn" disabled={true}>Mark All as Read</button>
+              <button className="overall-btn" onClick={e => handleClear(e)}>Clear All</button>
             </>
           ) : (
             <>
-              <button type="button" className="btn btn-info" onClick={e => handleRead(e)}>Mark All as Read</button>
-              <button type="button" className="btn btn-secondary" onClick={e => handleClear(e)}>Clear All</button>
+              <button className="overall-btn" onClick={e => handleRead(e)}>Mark All as Read</button>
+              <button className="overall-btn" onClick={e => handleClear(e)}>Clear All</button>
             </>
           )}
         </div>
-      </div>
 
-      <div className="my-3 p-3">
+      <div className="notifs-container">
         <Notifications notifs={notifs} setNotifs={setNotifs} />
+      </div>
       </div>
     </div>
   )

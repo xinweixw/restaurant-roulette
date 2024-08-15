@@ -11,7 +11,7 @@ h3 {
     margin: 2px;
     font-size: 0.9rem;
     padding: 5px 10px;
-    background-color: lightgray;
+    background-color: #f0e6cc;
     color: gray;
     border: 1px solid transparent;
     border-radius: 5px;
@@ -20,8 +20,9 @@ h3 {
 }
 
 .filter-button:hover {
-    background-color: antiquewhite;
+    background-color: #ffda8b;
     border-color: orange;
+    color: #fff;
 }
 
 .filter-button.selected {

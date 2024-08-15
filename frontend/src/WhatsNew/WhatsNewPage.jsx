@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NewRestaurantList from './NewRestaurantList';
 import WhatsNewBackend from '../apis/WhatsNewBackend';
 import Loading from '../assets/Loading';
+import "./WhatsNewPage.css";
 
 const WhatsNewPage = () => {
     const [newRests, setNewRests] = useState([]);
@@ -38,11 +39,11 @@ const WhatsNewPage = () => {
     }
 
   return (
-    <div>
+    <div className="whatsnew-container">
         <div>
-            <h1 className="text-warning text-center">What's New?</h1>
+            <h1>What's New?</h1>
         </div>
-        <div className="my-3 p-2">
+        <div>
             <NewRestaurantList newRestaurants={newRests} />
         </div>
     </div>

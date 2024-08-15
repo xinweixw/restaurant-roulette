@@ -41,7 +41,7 @@ const FavouriteHeader = ({addFolders}) => {
                     Favourites
                 </h1>
                 <br />
-                <button onClick={() => setIsClicked(true)} className="btn btn-primary">Add Folder</button>
+                <button onClick={() => setIsClicked(true)}>Add Folder</button>
             </main>
             
             <Popup isClicked={isClicked} setIsClicked={setIsClicked}>
@@ -54,7 +54,7 @@ const FavouriteHeader = ({addFolders}) => {
                         onChange={e => setFName(e.target.value)}
                         required
                     />
-                    <button onClick={handleSubmit} className="btn btn-primary ms-2" type="submit">Add</button>
+                    <button onClick={handleSubmit} type="submit">Add</button>
                 </form>
             </Popup>
 

@@ -1,14 +1,14 @@
 .search-results-wrapper {
     margin-top: 2rem;
-    background-color: white;
-    width: 100%;
+    background-color: #fcfaf1;
+    width: 90%;
     height: 100%;
     border-radius: 10px;
     align-items: center;
 }
 
 .search-results-list {
-    width: 90%;
+    width: 100%;
     background-color: transparent;
     display: flex;
     flex-direction: column;

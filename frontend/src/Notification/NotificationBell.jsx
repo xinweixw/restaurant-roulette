@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NotificationBackend from '../apis/NotificationBackend';
 import notificationPic from '../assets/notification.png';
 import { useNavigate } from 'react-router-dom';
+import "./Notification.css";
 
 const NotificationBell = () => {
     const [notifs, setNotifs] = useState([]);
@@ -37,8 +38,18 @@ const NotificationBell = () => {
 
     return (
         <>
-            {unreadNotifs.length >= 1 ? (<button className="btn btn-outline-primary" onClick={() => navigate("/notification")}><img src={notificationPic} alt="unread notification pic"/></button>) : 
-            (<button className="btn btn-outline-warning" onClick={() => navigate("/notification")}><i className="fa-regular fa-bell"></i></button>)}
+            {unreadNotifs.length >= 1 ? (
+                <button 
+                    className="bell" 
+                    onClick={() => navigate("/notification")}>
+                        <img src={notificationPic} alt="unread notification pic"/>
+                </button>
+                ) : (
+                    <button 
+                        className="bell" 
+                        onClick={() => navigate("/notification")}>
+                            <i className="fa-regular fa-bell"></i>
+                    </button>)}
         </>
     )
 }

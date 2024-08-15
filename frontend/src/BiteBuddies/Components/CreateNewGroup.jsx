@@ -74,6 +74,17 @@ const CreateNewGroup = () => {
     const handleCreateGroup = async () => {
         console.log("Creating new group...");
         try {
+            //if no group name
+            if (!groupName) {
+                toast.error("Please enter a group name!");
+                return;
+            }
+
+            if (groupMembers.length < 2) {
+                toast.error("Please add group members")
+                return;
+            }
+
             // Insert new group into 'chats' table
             const { data: newGroup, error: newGroupError } = await supabase
                 .from('chats')
@@ -125,10 +136,11 @@ const CreateNewGroup = () => {
 
 
     return (
-        <div className="Container">
-            <button onClick={() => navigate("/bite-buddies")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
+        <div>
+        <div className="create-group-container">
+            <button onClick={() => navigate("/bite-buddies")} className="back-button"><i className="fa-solid fa-chevron-left"></i></button>
             
-            <div className="TopicName">Bite Buddies</div>
+            <div className='bb-header'>Create a new group!</div>
 
             <input
                 className='input'
@@ -162,19 +174,23 @@ const CreateNewGroup = () => {
             />
             </div>
 
+            <div className='bb-header'>Selected Members:</div>
+
             <div className="group-members">
-                <h3>Selected Members:</h3>
                 {groupMembers.map((member, index) => (
-                    <div key={index}>
+                    <div className="group-member" key={index} onClick={() => handleRemoveMember(member)}>
                         {member.user_name}
                         {member.user_id !== currentUser?.user_id && (
-                            <button onClick={() => handleRemoveMember(member)}>Remove</button>
+                            // <button className="remove-member-btn" onClick={() => handleRemoveMember(member)}>
+                            <div>
+                                <i className='bx bx-x'></i>
+                            </div>
                         )}
                     </div>
                 ))}
             </div>
-
-            <button onClick={handleCreateGroup}>Create New Group</button>
+        </div>
+        <button onClick={handleCreateGroup}>Create New Group</button>
         </div>
     );
 };

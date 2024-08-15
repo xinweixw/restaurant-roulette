@@ -5,6 +5,7 @@ import FavRestaurantList from './FavRestaurantList';
 import Popup from './Popup';
 import { toast } from 'react-toastify';
 import Loading from '../assets/Loading';
+import "./FolderPage.css";
 
 const FolderPage = () => {
   const navigate = useNavigate();
@@ -123,12 +124,12 @@ const FolderPage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("/favourites")} className="d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
+      <button onClick={() => navigate("/favourites")} className="back-button"><i className="fa-solid fa-chevron-left"></i></button>
       {selectedFolder && <h1 className="text-body-warning text-center">{selectedFolder.folder_name}</h1>}
       <br />
-      {selectedFolder && selectedFolder.folder_name !== "All" ? (<button onClick={() => setIsClicked(true)} className="btn btn-primary">Edit Folder</button>) : 
+      {selectedFolder && selectedFolder.folder_name !== "All" ? (<button onClick={() => setIsClicked(true)} className="folder-btn">Edit Folder</button>) : 
       ""}
-      {selectedFolder && selectedFolder.folder_name !== "All" ? (<button onClick={() => setIsDeleting(true)} className="btn btn-secondary ms-2">Delete Folder <i className="fa-solid fa-trash"></i></button>) : 
+      {selectedFolder && selectedFolder.folder_name !== "All" ? (<button onClick={() => setIsDeleting(true)}  className="folder-btn">Delete Folder <i className="fa-solid fa-trash"></i></button>) : 
       ""}
       <br /><br />
 
@@ -150,14 +151,14 @@ const FolderPage = () => {
             required
           />
           {errMsg && <p>{errMsg}</p>}
-          <button onClick={handleSubmit} className="btn btn-primary ms-2" type="submit">Edit</button>
+          <button onClick={handleSubmit} type="submit">Edit</button>
         </form>
       </Popup>
 
       <Popup isClicked={isDeleting} setIsClicked={setIsDeleting} >
         <div>
           <p>Are you sure you want to delete this folder?</p>
-          <button onClick={(e) => handleDelete(e)} className="btn btn-primary ms-2">Yes</button>
+          <button onClick={(e) => handleDelete(e)}>Yes</button>
         </div>
       </Popup>
 

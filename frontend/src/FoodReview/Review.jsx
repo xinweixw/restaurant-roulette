@@ -5,6 +5,7 @@ import RestaurantBackend from '../apis/RestaurantBackend';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 import { toast } from 'react-toastify';
 import Popup from '../Favourites/Popup';
+import "./RestaurantPage.css";
 
 const Review = (props) => {
   const { id } = useParams();
@@ -118,12 +119,12 @@ const Review = (props) => {
                 <p className="card-text">{review.review}</p>
                 {review.user_name === name && (
                   <div>
-                    <button onClick={e => handleUpdate(e, review.rest_id, review.review_id)} className="btn btn-info me-2">Update</button>
-                    <button onClick={() => setIsDeleting(true)} className="btn btn-warning me-2">Delete</button>
+                    <button onClick={e => handleUpdate(e, review.rest_id, review.review_id)} className="review-btn">Update</button>
+                    <button onClick={() => setIsDeleting(true)} className="review-btn">Delete</button>
                     <Popup isClicked={deleting} setIsClicked={setIsDeleting}>
                       <div>
                         <p>Are you sure you want to delete this review?</p>
-                        <button onClick={e => handleDelete(e, review.review_id)} className="btn btn-warning me-2">Confirm Delete</button>
+                        <button onClick={e => handleDelete(e, review.review_id)} className="review-btn">Confirm Delete</button>
                       </div>
                     </Popup>
                   </div>

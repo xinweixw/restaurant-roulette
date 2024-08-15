@@ -9,6 +9,7 @@ import AddReview from './AddReview';
 import Popup from '../Favourites/Popup';
 import AddToFavourite from './AddToFavourite';
 import AddNewFolder from './AddNewFolder';
+import Loading from '../assets/Loading';
 // import Drawer from '@mui/material/Drawer';
 
 
@@ -75,16 +76,12 @@ const RestaurantPage = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <h1 className="loadIcon">
-        <i className="bx bx-loader-circle bx-spin"/>
-      </h1>
-    );
+    return <Loading/>
   }
 
   return (
     <div>
-      <button onClick={() => navigate("/food-search")} className="d-flex justify-content-start ms-2 ps-2"><i className="fa-solid fa-chevron-left"></i></button>
+      <button onClick={() => navigate("/food-search")} className="back-button"><i className="fa-solid fa-chevron-left"></i></button>
       {selectedRestaurant && (
         <>
           <RestaurantInfo oneRestaurant={selectedRestaurant.restaurant} setIsClicked={setIsClicked} inFav={inFav} setInFav={setInFav} addFavFolder={addFavFolder} setIsAdding={setIsAdding} />

@@ -9,6 +9,8 @@ import './GroupPage.css';
 import StarRating from '../../FoodReview/StarRating';
 import NotificationBackend from '../../apis/NotificationBackend';
 import Popup from '../../Favourites/Popup';
+import "../../assets/backButton.css";
+import "../../FoodSearch/components/ResultRestaurant.css"
 
 const GroupPage = () => {
     const navigate = useNavigate();
@@ -380,19 +382,28 @@ const GroupPage = () => {
     }
 
     return (
-        <div className="Container" style={{ height: '100vh' }}>
-            <div className="GroupHeader">
+        <div>
+        <div className="group-page-container">
+            
+            <button onClick={() => navigate("/bite-buddies")} className="back-button"><i className="fa-solid fa-chevron-left"></i></button>
+
+            <div className="group-header">
                 <div className="GroupSubHeader">
-                    <button onClick={() => navigate("/bite-buddies")} className="btn d-flex justify-content-start"><i className="fa-solid fa-chevron-left"></i></button>
                     <div className="GroupName">{groupName}</div>
                 </div>
                 <div className="GroupMembers">Group Members: {groupMembers.map(user => user.user_name).join(', ')}</div>
             </div>
 
             {activeCollaboration ? (
-                <div>
+                <div className="active-collab">
                     <h2>Collaboration has started!</h2>
-                    <button onClick={handleEndCollab}>End Collaboration</button>
+                    <div className="collab-users-container">Users that have joined the collaboration:
+                            <div className='collab-users'>
+                                {collabUsers.map(user => user.user_name).join(', ')}
+                            </div>
+                    </div>
+
+                <div className="underline" style={{width:"70%", margin: "10px"}}></div>
 
                     {iHaveCollabed ? (
                         <div>You have joined the collaboration!</div>
@@ -400,11 +411,10 @@ const GroupPage = () => {
                         <JoinCollab currentUser={currentUser} chatId={id} collabId={collabId} setIHaveCollabed={setIHaveCollabed} fetchCollabUsers={fetchCollabUsers}/>
                     )}
 
-                    <div className="collabUsersContainer">Users that have joined the collaboration:
-                        <div className='collabUsers'>
-                            {collabUsers.map(user => user.user_name).join(', ')}
-                        </div>
-                    </div>
+                <div className="underline" style={{width:"70%", margin: "10px"}}></div>
+
+                <button onClick={handleEndCollab} style={{margin:"10px"}}>End Collaboration</button>
+
                 </div>
             ) : (
                 <div>
@@ -415,38 +425,47 @@ const GroupPage = () => {
             )}
 
             {/* Display Collaboration History */}
-            <div className="collabHistoryContainer">
+            <div className="collab-history">
                 <span>Collaboration History :</span>
                 {history.length > 0 ? (
-                    <ul>
+                    <div className="collab-history-container">
                         {history.map(collab => (
-                            <div className="d-flex justify-content-between">
-                            <div className="ResultRestaurantKey" onClick={() => navigate(`/restaurants/${collab.rec_rest.rest_id}`)}>
+                            <div className="ResultRestaurantKey" onClick={() => onSelect(collab.rec_rest.rest_id)}>
                             <img src={collab.rec_rest.image_url} alt={collab.rec_rest.rest_name} className="restImage" />
-                                <div className='row1'>
+                            <div className='row1'>
+                                <div className="info-row">
                                     <div className="restName">{collab.rec_rest.rest_name}</div>
+                                    <div className="rating"><StarRating stars={collab.rec_rest.average_star} /></div>
+                                </div>
+                                <div className="info-row">
+                                    <div className="cuisine">
+                                        <i className='bx bxs-bowl-rice'></i>
+                                        {collab.rec_rest.cuisine}</div>
                                     <div className="priceRange">{collab.rec_rest.rest_price}</div>
-                                    <div className="rating"><StarRating stars={collab.rec_rest.average_star} /> {collab.rec_rest.average_star} ({collab.rec_rest.num_review})</div>
-                                    <div className="cuisine">{collab.rec_rest.cuisine}</div>
-                                    <div className='location'>{collab.rec_rest.rest_location}</div>
+                                </div>
+                                <div className="info-row">
+                                    <div className='location'>
+                                        <i className='bx bx-map'></i>
+                                        {collab.rec_rest.rest_location}</div>
                                 </div>
                             </div>
                         </div>
                         ))}
-                    </ul>
+                    </div>
                 ) : (
                     <span>No past collaborations.</span>
                 )}
             </div>
 
+            </div>
             {activeCollaboration ? null : (<button onClick={(e) => setIsClicked(true)}>Delete Group</button>)}
             <Popup isClicked={isClicked} setIsClicked={setIsClicked} >
                 <div className="confirmDelete">
                     <span>Are you sure you want to delete this group?</span>
                     <br/>
-                    <div className="buttonGroup">
-                        <button className="btn btn-primary p-2 m-2" onClick={handleDeleteGroup}>Yes</button>
-                        <button className="btn btn-primary p-2 m-2" onClick={(e) => setIsClicked(false)}>No</button>
+                    <div className="button-group">
+                        <button className="delete-btn" onClick={handleDeleteGroup}>Yes</button>
+                        <button className="delete-btn" onClick={(e) => setIsClicked(false)}>No</button>
                     </div>
                 </div>
             </Popup>

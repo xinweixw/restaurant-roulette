@@ -1,0 +1,24 @@
+.collab-result-container {
+    display: flex;
+    position: relative;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    max-height: 1500px;
+    padding: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background-color: #ffda8b;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.collab-header{
+    font-size: 40px;
+    margin-top:10px;
+    margin-bottom:10px;
+    color: #582c1b;
+    font-weight: 700;
+
+}

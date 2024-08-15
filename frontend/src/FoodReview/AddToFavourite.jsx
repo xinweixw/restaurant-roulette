@@ -112,7 +112,7 @@ const AddToFavourite = ({ favFolders, setFavFolder, addInFav, setIsClicked }) =>
                 </div>
 
                 {favFolders ? (
-                    <button onClick={handleSubmit} type="submit" className="btn btn-primary my-1 p-2">Save</button>
+                    <button onClick={handleSubmit} type="submit" >Save</button>
                 ) : (
                     <p>This restaurant is already saved in every folder</p>
                 )}
